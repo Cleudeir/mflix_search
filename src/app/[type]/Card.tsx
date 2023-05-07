@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { Suspense } from "react";
 import { Tv } from "@/app/interfaces/Tv";
 
 interface Props {
@@ -28,7 +27,7 @@ async function Card({ item, type }: Props): JSX.Element {
   return (
     data && (
       <a href={"/" + type + "/view/" + data.id + item.url.replace(".html", "")}>
-        <div className="group relative block flex-col items-center justify-start p-0 m-1 w-80 h-64 text-black rounded-5 bg-gray-300 shadow transition-all duration-300 scale-95 hover:scale-100 rounded-lg border-2">
+        <div className="group relative flex-col items-center justify-start p-0 m-1 w-80 h-64 text-black rounded-5 bg-gray-300 shadow transition-all duration-300 scale-95 hover:scale-100 rounded-lg border-2">
           <img
             className="w-full h-full object-cover object-center rounded-lg"
             src={

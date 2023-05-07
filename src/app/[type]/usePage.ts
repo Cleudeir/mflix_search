@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 interface Props {
   type: "movie" | "tv";
 }
-function usePage(params: Props) {
+function usePageHome(params: Props) {
   const type = params.type;
   const [data, setData] = useState<null | any[]>(null);
   useEffect(() => {
@@ -31,4 +31,4 @@ function usePage(params: Props) {
   return { data, type };
 }
 
-export default usePage;
+export default usePageHome;
