@@ -10,9 +10,7 @@ function usePageHome(params: Props) {
   const [data, setData] = useState<null | any[]>(null);
   useEffect(() => {
     async function start() {
-      const url = `${process.env.NEXT_PUBLIC_BACK_URL}/api/map${
-        type[0].toLocaleUpperCase() + type.slice(1)
-      }`;
+      const url = `${process.env.NEXT_PUBLIC_BACK_URL}/map/${type}`;
       console.log(url);
       const respMapMovie = await noCors(url);
       console.log(respMapMovie);
