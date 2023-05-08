@@ -16,7 +16,7 @@ interface Props {
 
 export default function Home({ params }: Props): JSX.Element {
 
- const {data, type} = usePageHome(params)
+ const {data, type, input, setInput} = usePageHome(params)
   return (
     <>
     <div className="flex flex-row flex-wrap justify-center items-center bg-slate-700 w-full p-1">
@@ -24,7 +24,7 @@ export default function Home({ params }: Props): JSX.Element {
       <Link className={`${type === 'tv' ? "bg-green-300 text-gray-900" : "bg-slate-900" } py-3 px-4 m-1 rounded-lg hover:bg-opacity-50`} href={'/tv'}>Series</Link>
       <Link className={`${type === 'movie' ? "bg-green-300 text-gray-900" : "bg-slate-900" } py-3 px-4 m-1 rounded-lg hover:bg-opacity-50`} href={'/movie'}>Movie</Link>
       </div>     
-      <input type="text" className="mx-1 my-2 p-3 rounded-lg text-center" placeholder="Buscar"/>
+      <input value={input}  onChange={(e)=>setInput(e.target.value)} type="text" className="text-slate-950 mx-1 my-2 p-3 rounded-lg text-center" placeholder="Buscar"/>
       </div>
     <div className="flex flex-row flex-wrap justify-center items-center bg-slate-900 w-full min-h-screen">
       
@@ -32,7 +32,8 @@ export default function Home({ params }: Props): JSX.Element {
         data.map((item: any) => {
           console.log(item)
           return (
-            <Suspense fallback={<div className="w-80 h-64"><Loading /></div>} key={item.url}>
+            <Suspense  key={item.url}>
+              {/* @ts-expect-error Server Component */} 
               <Card item={item} type={type} />
             </Suspense>
           );

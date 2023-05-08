@@ -4,7 +4,6 @@ import { Movie } from "@/app/interfaces/Movie";
 import { Tv } from "@/app/interfaces/Tv";
 import noCors from "@/utils/noCors";
 import { useEffect, useState } from "react";
-import { episode } from "./../../../interfaces/Tv";
 
 interface Props {
   type: "movie" | "tv";
@@ -17,7 +16,7 @@ function usePageVideo(params: Props) {
 
   const { type, video } = params;
   const [id, url] = video;
-  let item: Tv | Movie;
+  let item: Tv | Movie | undefined;
   if (type === "movie") {
     item = urlTransformMovie(url, id);
   } else if (type === "tv") {
@@ -64,8 +63,8 @@ function usePageVideo(params: Props) {
 
   useEffect(() => {
     async function change() {
-      if (episodes) { 
-        console.log("index",index)       
+      if (episodes) {
+        console.log("index", index);
         const _item = episodes[index];
         const _episode = await noCors(
           `${process.env.NEXT_PUBLIC_BACK_URL}/info/${type}`,

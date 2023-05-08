@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import { Tv } from "@/app/interfaces/Tv";
+import { Movie } from "../interfaces/Movie";
+import Link from "next/link";
 
 interface Props {
-  item: Tv;
+  item: Tv | Movie;
   type: "movie" | "tv";
 }
 
-async function Card({ item, type }: Props): JSX.Element {
+async function Card({ item, type }: Props): Promise< JSX.Element | null> {
   const resp = await fetch(
     `https://api.themoviedb.org/3/search/${type}?include_adult=false&page=1&language=pt-BR&api_key=5417af578f487448df0d4932bc0cc1a5&query=${item.title}&year=${item.year}`,
     { next: { revalidate: 60 } }
@@ -26,7 +28,7 @@ async function Card({ item, type }: Props): JSX.Element {
   const newLocal: number = data?.overview?.length || 0;
   return (
     data && (
-      <a href={"/" + type + "/view/" + data.id + item.url.replace(".html", "")}>
+      <Link href={"/" + type + "/view/" + data.id + item.url.replace(".html", "")}>
         <div className="group relative flex-col items-center justify-start p-0 m-1 w-80 h-64 text-black rounded-5 bg-gray-300 shadow transition-all duration-300 scale-95 hover:scale-100 rounded-lg border-2">
           <img
             className="w-full h-full object-cover object-center rounded-lg"
@@ -51,7 +53,7 @@ async function Card({ item, type }: Props): JSX.Element {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     )
   );
 }

@@ -21,7 +21,7 @@ export interface episode {
   name?: string;
 }
 
-export default function View({ params }): JSX.Element {
+export default function Video({ params }): JSX.Element {
   const { episode, episodes, item, type, setIndex, index } =
     usePageVideo(params);
   if (!episode && !item) {
