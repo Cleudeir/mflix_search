@@ -13,10 +13,14 @@ export interface episode {
   name?: string;
 }
 
-export default function Video({ params }): JSX.Element {
+export interface Props {
+   params : any 
+}
+
+export default function Video({ params }: Props): JSX.Element {
   const { episode, episodes, item, type, setIndex, index } =
     usePageVideo(params);
-  if (!episode && !item) {
+  if (!episode) {
     return <Loading />;
   }
   return (
@@ -49,7 +53,7 @@ export default function Video({ params }): JSX.Element {
                   setIndex(Number(e.target.value));
                 }}
               >
-                {episodes?.map((_item, key) => (
+                {episodes && episodes.map((_item, key) => (
                   <option key={key} value={_item.id}>
                     {_item.name || _item.id + 1}
                   </option>
@@ -73,7 +77,7 @@ export default function Video({ params }): JSX.Element {
               type="button"
               className="cursor-pointer h-10 w-12 text-white bg-gray-700 font-bold rounded-md"
               onClick={() => {
-                if(index < episodes?.length -1){
+                if(episodes && index < episodes.length -1){
                   setIndex(index + 1);
                 }
                 

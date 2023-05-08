@@ -15,7 +15,7 @@ function usePageHome(params: Props) {
 
   async function dataFilter(
     mode: "category" | "popular",
-    param?: string
+    param?: string | number
   ): Promise<void> {
     let url;
     if (mode === "category") {

@@ -2,6 +2,7 @@ export interface Tv {
     id: number
     url: string
     title: string
+    year?: string
     adult?: boolean
     backdrop_path?: string
     genre_ids?: number[]

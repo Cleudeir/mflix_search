@@ -7,10 +7,10 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import genres from "../utils/genres";
 interface Props {
-  dataFilter: (mode: "category" | "popular", param?: string) => void;
+  dataFilter: (mode: "category" | "popular", param?: string | number) => void;
   type: "movie" | "tv"
   input: string;
-  setInput: (value:string) => void;
+  setInput: (value:string ) => void;
 }
 function Header({ dataFilter, type , input , setInput}: Props) {
   return (

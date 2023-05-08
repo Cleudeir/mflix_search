@@ -9,10 +9,9 @@ interface Props {
 }
 
 async function Card({ item, type }: Props): Promise<JSX.Element | null> {
-  const resp = await fetch(
-    `https://api.themoviedb.org/3/search/${type}?include_adult=false&page=1&language=pt-BR&api_key=5417af578f487448df0d4932bc0cc1a5&query=${item.title}&year=${item.year}`,
-    { next: { revalidate: 60 } }
-  );
+  const url = `https://api.themoviedb.org/3/search/${type}?include_adult=false&page=1&language=pt-BR&api_key=5417af578f487448df0d4932bc0cc1a5&query=${item.title}&year=${item.year}`;
+
+  const resp = await fetch(url, { next: { revalidate: 60 } });
   const json = await resp.json();
   console.log(json);
   const data = json.results[0];

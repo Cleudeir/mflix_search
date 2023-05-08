@@ -8,6 +8,7 @@
         "científica",
         "Comédia",
         "Documentário",
+        "dribbble",
         "Família",
         "Faroeste",
         "Ficção",
@@ -24,6 +25,7 @@
         "offcanvas",
         "Offcanvas",
         "Política",
-        "Telefilme"
+        "Telefilme",
+        "tmdb"
     ]
 }
