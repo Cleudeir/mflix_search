@@ -61,7 +61,10 @@ function usePageHome(params: Props) {
       let url = `${process.env.NEXT_PUBLIC_BACK_URL}/map/${type}`;
       console.log(url);
       const respMap = await noCors(url);
-      setSave(respMap);
+      console.log(respMap)
+      if(!respMap.error){
+        setSave(respMap);
+      }      
     }
     if (type) {
       start();
