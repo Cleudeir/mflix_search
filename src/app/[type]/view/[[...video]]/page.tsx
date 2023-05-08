@@ -7,14 +7,6 @@ import Link from "next/link";
 import usePageVideo from "./usePage";
 import Loading from "../../loading";
 
-export async function generateMetadata({ params }) {
-  const [id, url] = params.video;
-  console.log("url: ", id, url);
-  return {
-    title: { url },
-  };
-}
-
 export interface episode {
   id: number;
   url: string;
@@ -31,44 +23,43 @@ export default function Video({ params }): JSX.Element {
     episode &&
     item && (
       <div
-        className={`flex flex-col items-center justify-center w-screen h-screen`}
+        className={`flex flex-col items-center justify-center w-screen h-screen font-bold  text-xs `}
       >
         <div
-          className={`flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-md py-2 px-4 mb-[-50px] text-white text-sm`}
+          className={`flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-md p-2 mb-[-70px] text-white `}
         >
           <Link href={`${type}`}>
             <button
               type="button"
-              className="cursor-pointer h-10 w-20 text-white bg-gray-700 font-bold rounded-md mr-5"
+              className="cursor-pointer h-10 w-12 mx-2 bg-gray-700 text-white font-bold rounded-md"
             >
               Home
             </button>
           </Link>
-          <div className="mr-20">
-            <h2 className="uppercase">{item.title || item.name}</h2>
+          <div className="mx-2 text-gray-900  uppercase px-2 py-1">
+            {item.title}
           </div>
           { type === 'tv' ?
-            <div className="mr-5 flex flex-row">
-            <h2>
+            <div className="flex flex-row">            
               <select
-                className="h-10 mr-2 bg-gray-700 text-white font-bold rounded-md pl-2 pr-6 cursor-pointer appearance-none"
+                className="text-center h-10 w-12 mx-2 bg-gray-700 text-white  rounded-md  cursor-pointer "
                 value={index}
                 name="select"
                 onChange={(e) => {
                   setIndex(Number(e.target.value));
                 }}
               >
-                {episodes.map((_item, key) => (
+                {episodes?.map((_item, key) => (
                   <option key={key} value={_item.id}>
                     {_item.name || _item.id + 1}
                   </option>
                 ))}
               </select>
-            </h2>
+            
 
             <button
               type="button"
-              className="cursor-pointer h-10 w-20 text-white bg-gray-700 font-bold rounded-md mr-2"
+              className="cursor-pointer h-10 w-12 mx-2 text-white bg-gray-700 font-bold rounded-md"
               onClick={() => {
                 if(index > 0){
                   setIndex(index - 1);
@@ -80,7 +71,7 @@ export default function Video({ params }): JSX.Element {
             </button>
             <button
               type="button"
-              className="cursor-pointer h-10 w-20 text-white bg-gray-700 font-bold rounded-md"
+              className="cursor-pointer h-10 w-12 text-white bg-gray-700 font-bold rounded-md"
               onClick={() => {
                 if(index < episodes?.length -1){
                   setIndex(index + 1);
