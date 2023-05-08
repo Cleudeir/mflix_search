@@ -4,12 +4,14 @@ import { Movie } from "@/app/interfaces/Movie";
 import { Tv } from "@/app/interfaces/Tv";
 import noCors from "@/utils/noCors";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   type: "movie" | "tv";
   video: [id: string, url: string];
 }
 function usePageVideo(params: Props) {
+  const route = useRouter()
   const [episodes, setEpisodes] = useState<any[] | null>(null);
   const [episode, setEpisode] = useState<any>(null);
   const [index, setIndex] = useState(0);
@@ -33,6 +35,9 @@ function usePageVideo(params: Props) {
             body: JSON.stringify(item),
           }
         );
+        if(movie.error){
+          return route.push(`/${type}`)
+        }
         setEpisodes([movie]);
         setEpisode(movie);
       } else if (type === "tv") {
@@ -43,6 +48,9 @@ function usePageVideo(params: Props) {
             body: JSON.stringify(item),
           }
         );
+        if(_episodes.error){
+          return route.push(`/${type}`)
+        }
         setEpisodes(_episodes);
         const _item = _episodes[index];
         const _episode = await noCors(
@@ -52,6 +60,9 @@ function usePageVideo(params: Props) {
             body: JSON.stringify(_item),
           }
         );
+        if(_episode.error){
+          return route.push(`/${type}`)
+        }
         setEpisode(_episode);
       }
     }
