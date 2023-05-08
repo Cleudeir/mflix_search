@@ -13,23 +13,17 @@ const parserUrl = (url: string) => {
 
 export async function GET(request: NextRequest) {
   const url = parserUrl(request.url);
-  console.log(url);
-
   try {
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
     return NextResponse.json(data);
   } catch (error: any) {
-    console.log(error);
     return NextResponse.json({ error: error.message, url });
   }
 }
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const url = parserUrl(request.url);
-  console.log(url);
-  console.log(body);
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -40,10 +34,8 @@ export async function POST(request: NextRequest) {
       },
     });
     const data = await res.json();
-    console.log(data);
     return NextResponse.json(data);
   } catch (error: any) {
-    console.log(error);
     return NextResponse.json({ error: error.message, url });
   }
 }

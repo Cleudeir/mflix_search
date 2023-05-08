@@ -24,8 +24,7 @@ function usePageVideo(params: Props) {
   }
 
   useEffect(() => {
-    async function start() {
-      console.log(item);
+    async function start() { 
       if (type === "movie") {
         const movie = await noCors(
           `${process.env.NEXT_PUBLIC_BACK_URL}/info/${type}`,
@@ -33,8 +32,7 @@ function usePageVideo(params: Props) {
             method: "POST",
             body: JSON.stringify(item),
           }
-        );
-        console.log(movie);
+        );  
         setEpisode(movie);
       } else if (type === "tv") {
         let _episodes = await noCors(
@@ -63,8 +61,7 @@ function usePageVideo(params: Props) {
 
   useEffect(() => {
     async function change() {
-      if (episodes) {
-        console.log("index", index);
+      if (episodes) {    
         const _item = episodes[index];
         const _episode = await noCors(
           `${process.env.NEXT_PUBLIC_BACK_URL}/info/${type}`,
