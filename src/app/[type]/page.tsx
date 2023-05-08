@@ -1,9 +1,6 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import Card from "./Card";
-import { Tv } from "../interfaces/Tv";
-import { Movie } from "../interfaces/Movie";
-import noCors from "@/utils/noCors";
 import usePageHome from "./usePage";
 import Loading from "./loading";
 import Link from "next/link";
@@ -18,7 +15,7 @@ interface Props {
 }
 
 export default function Home({ params }: Props): JSX.Element {
-  
+
  const {data, type} = usePageHome(params)
   return (
     <>
@@ -35,7 +32,7 @@ export default function Home({ params }: Props): JSX.Element {
         data.map((item: any) => {
           console.log(item)
           return (
-            <Suspense fallback={<Loading />} key={item.url}>
+            <Suspense fallback={<div className="w-80 h-64"><Loading /></div>} key={item.url}>
               <Card item={item} type={type} />
             </Suspense>
           );

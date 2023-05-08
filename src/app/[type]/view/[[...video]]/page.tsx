@@ -22,13 +22,13 @@ export interface episode {
 }
 
 export default function View({ params }): JSX.Element {
-  const { episodes, item, type, changeIndex, selectValue, setSelectValue } =
+  const { episode, episodes, item, type, setIndex, index } =
     usePageVideo(params);
-  if (!episodes && !item) {
+  if (!episode && !item) {
     return <Loading />;
   }
   return (
-    episodes &&
+    episode &&
     item && (
       <div
         className={`flex flex-col items-center justify-center w-screen h-screen`}
@@ -51,11 +51,11 @@ export default function View({ params }): JSX.Element {
             <div className="mr-5 flex flex-row">
             <h2>
               <select
-                className="h-10 bg-gray-700 text-white font-bold rounded-md pl-2 pr-6 cursor-pointer appearance-none"
-                value={selectValue}
+                className="h-10 mr-2 bg-gray-700 text-white font-bold rounded-md pl-2 pr-6 cursor-pointer appearance-none"
+                value={index}
                 name="select"
                 onChange={(e) => {
-                  changeIndex(0, Number(e.target.value));
+                  setIndex(Number(e.target.value));
                 }}
               >
                 {episodes.map((_item, key) => (
@@ -68,9 +68,12 @@ export default function View({ params }): JSX.Element {
 
             <button
               type="button"
-              className="cursor-pointer h-10 w-20 text-white bg-gray-700 font-bold rounded-md mr-5"
+              className="cursor-pointer h-10 w-20 text-white bg-gray-700 font-bold rounded-md mr-2"
               onClick={() => {
-                changeIndex(-1);
+                if(index > 0){
+                  setIndex(index - 1);
+                }
+                
               }}
             >
               Return
@@ -79,7 +82,10 @@ export default function View({ params }): JSX.Element {
               type="button"
               className="cursor-pointer h-10 w-20 text-white bg-gray-700 font-bold rounded-md"
               onClick={() => {
-                changeIndex(1);
+                if(index < episodes?.length -1){
+                  setIndex(index + 1);
+                }
+                
               }}
             >
               Next
@@ -88,10 +94,10 @@ export default function View({ params }): JSX.Element {
           : ""
           }
         </div>
-        {episodes && (
+        {episode && (
           <iframe
             frameBorder={0}
-            src={"https://sinalpublico.com" + episodes[selectValue].url}
+            src={"https://sinalpublico.com" + episode.url}
             allowFullScreen={false}
             className="w-screen h-screen"
           />

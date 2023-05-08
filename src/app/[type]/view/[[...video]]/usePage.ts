@@ -4,14 +4,16 @@ import { Movie } from "@/app/interfaces/Movie";
 import { Tv } from "@/app/interfaces/Tv";
 import noCors from "@/utils/noCors";
 import { useEffect, useState } from "react";
+import { episode } from "./../../../interfaces/Tv";
 
 interface Props {
   type: "movie" | "tv";
-  video: [id: string, url: string]
+  video: [id: string, url: string];
 }
 function usePageVideo(params: Props) {
   const [episodes, setEpisodes] = useState<any[] | null>(null);
-  const [selectValue, setSelectValue] = useState(0);
+  const [episode, setEpisode] = useState<any | null>(null);
+  const [index, setIndex] = useState(0);
 
   const { type, video } = params;
   const [id, url] = video;
@@ -22,22 +24,38 @@ function usePageVideo(params: Props) {
     item = urlTransformTv(url, id);
   }
 
-  useEffect(() => {   
+  useEffect(() => {
     async function start() {
-        console.log(item);
-      const _data = await noCors(
-        `${process.env.NEXT_PUBLIC_BACK_URL}/info/${type}`,
-        {
-          method: "POST",
-          body: JSON.stringify(item),
-        }
-      );
+      console.log(item);
       if (type === "movie") {
-        setEpisodes(_data)
+        const movie = await noCors(
+          `${process.env.NEXT_PUBLIC_BACK_URL}/info/${type}`,
+          {
+            method: "POST",
+            body: JSON.stringify(item),
+          }
+        );
+        console.log(movie);
+        setEpisode(movie);
       } else if (type === "tv") {
-        
+        let _episodes = await noCors(
+          `${process.env.NEXT_PUBLIC_BACK_URL}/list/${type}`,
+          {
+            method: "POST",
+            body: JSON.stringify(item),
+          }
+        );
+        setEpisodes(_episodes);
+        const _item = _episodes[index];
+        const _episode = await noCors(
+          `${process.env.NEXT_PUBLIC_BACK_URL}/info/${type}`,
+          {
+            method: "POST",
+            body: JSON.stringify(_item),
+          }
+        );
+        setEpisode(_episode);
       }
-      console.log(_data);      
     }
     if (item && id && url) {
       start();
@@ -45,63 +63,24 @@ function usePageVideo(params: Props) {
   }, []);
 
   useEffect(() => {
-
-    if (item.episodes) {
-
-        void (async () => {
-          let _item = item.episodes[0];
-          const _video = await getInfo({ item: _item });
-          setEpisodes(_video);
-          _item = item.episodes[1];
-          await getInfo({ item: _item });
-        })();      
+    async function change() {
+      if (episodes) { 
+        console.log("index",index)       
+        const _item = episodes[index];
+        const _episode = await noCors(
+          `${process.env.NEXT_PUBLIC_BACK_URL}/info/${type}`,
+          {
+            method: "POST",
+            body: JSON.stringify(_item),
+          }
+        );
+        setEpisode(_episode);
+      }
     }
-  }, [item]);
+    change();
+  }, [index]);
 
-  async function getInfo({ item }: { item: episode }): Promise<DataTv | null> {
-    try {
-     const data = await fetch(`/info/tv`, {
-      method: 'POST',
-      body: JSON.stringify({ item }),
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
-     })
-     const json = await data.json()
-     return json
-    } catch (error) {
-     console.warn(error)
-     return null
-    }
-   }
-
-  async function changeIndex(e: number, id?: number): Promise<void> {
-    if (item.episodes && video) {
-     setVideo(null)
-     let _id = video.id
-     if (id !== undefined) {
-      _id = id
-     }
-     let _index = _id + e
-     const episodesLength = item.episodes.length
-     if (_index >= episodesLength - 1) {
-      _index = episodesLength - 1
-     }
-     if (_index < 0) {
-      _index = 0
-     }
-     setSelectValue(_index)
-     const _item = item.episodes[_index]
-     const _video = await getInfo({ item: _item })
-     localStorage.setItem(String(item.id), JSON.stringify(_video))
-     setVideo(_video)
-     _index = _index + 1
-     if (_index < episodesLength - 1) {
-      const nextItem = item.episodes[_index]
-      await getInfo({ item: nextItem })
-     }
-    }
-   }
-
-  return { episodes, type, item ,changeIndex, selectValue, setSelectValue};
+  return { episode, episodes, type, item, index, setIndex };
 }
 
 export default usePageVideo;
@@ -134,7 +113,6 @@ function urlTransformTv(url: string, id: string): Tv {
     id: Number(id),
     url,
     title,
-    episodes: [],
   };
   return obj;
 }
