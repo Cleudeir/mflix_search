@@ -5,9 +5,6 @@ import usePageHome from "./usePage";
 import Link from "next/link";
 import Header from "./Header";
 
-export const metaData = {
-  title: "movie",
-};
 interface Props {
   params: {
     type: "movie" | "tv";
