@@ -4,6 +4,7 @@ import Card from "./Card";
 import usePageHome from "./usePage";
 import Link from "next/link";
 import Header from "./Header";
+import Loading from "../loading";
 
 interface Props {
   params: {
@@ -12,22 +13,31 @@ interface Props {
 }
 
 export default function Home({ params }: Props): JSX.Element {
+  const { data, setData, type, input, setInput, dataFilter } =
+    usePageHome(params);
 
- const {data, type, input, setInput, dataFilter} = usePageHome(params)
   return (
-    <div className="min-h-screen">
-    <Header dataFilter={dataFilter} type={type} input={input} setInput={setInput}/>
-    <div className="flex flex-row flex-wrap justify-center items-center bg-slate-700 w-full min-h-screen p-1">
-      {data &&
-        data.map((item: any) => {
-          return (
-            <Suspense  key={item.url}>
-              {/* @ts-expect-error Server Component */} 
-              <Card item={item} type={type} />
-            </Suspense>
-          );
-        })}
-    </div>
+    <div className="min-h-screen bg-slate-700">
+      <Header
+        dataFilter={dataFilter}
+        type={type}
+        input={input}
+        setInput={setInput}
+      />
+      <div className="flex flex-row flex-wrap justify-center items-center  w-full p-1 min-h-[calc(100vh-54px)]">
+        {data &&
+          data.map((item: any) => {
+            return (
+              <Suspense key={item.url}>
+                <div onClick={() => setData(null)}>
+                  {/* @ts-expect-error Server Component */}
+                  <Card item={item} type={type} />
+                </div>
+              </Suspense>
+            );
+          })}
+        {!data && <Loading />}
+      </div>
     </div>
   );
 }

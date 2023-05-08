@@ -14,7 +14,7 @@ interface Props {
 }
 function Header({ dataFilter, type , input , setInput}: Props) {
   return (
-    <Navbar bg="ligth" expand={"xl"} className="fixed top-0 left-0 mb-1 text-black">
+    <Navbar bg="ligth" expand={"xl"} className="h-[50px] bg-white mb-1 text-black">
       <Container fluid>
         <Navbar.Brand href="#">Mflix Search</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"xl"}`} />

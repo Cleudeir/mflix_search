@@ -5,7 +5,7 @@ import { Movie } from "@/app/interfaces/Movie";
 import { Tv } from "@/app/interfaces/Tv";
 import Link from "next/link";
 import usePageVideo from "./usePage";
-import Loading from "../../loading";
+import Loading from "../../../loading";
 
 export interface episode {
   id: number;
@@ -21,13 +21,13 @@ export default function Video({ params }: Props): JSX.Element {
   const { episode, episodes, item, type, setIndex, index } =
     usePageVideo(params);
   if (!episode) {
-    return <Loading />;
+    return <div className="bg-slate-700 w-screen h-screen"><Loading /></div>;
   }
   return (
     episode &&
     item && (
       <div
-        className={`flex flex-col items-center justify-center w-screen h-screen font-bold  text-xs `}
+        className={`bg-slate-700 flex flex-col items-center justify-center w-screen h-screen font-bold  text-xs `}
       >
         <div
           className={`flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-md p-2 mb-[-70px] text-white `}
@@ -46,7 +46,7 @@ export default function Video({ params }: Props): JSX.Element {
           { type === 'tv' ?
             <div className="flex flex-row">            
               <select
-                className="text-center h-10 w-12 mx-2 bg-gray-700 text-white  rounded-md  cursor-pointer "
+                className="text-center h-10 w-18 mx-2 bg-gray-700 text-white  rounded-md  cursor-pointer "
                 value={index}
                 name="select"
                 onChange={(e) => {

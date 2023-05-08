@@ -17,6 +17,7 @@ function usePageHome(params: Props) {
     mode: "category" | "popular",
     param?: string | number
   ): Promise<void> {
+    setData(null)
     let url;
     if (mode === "category") {
       url = `https://api.themoviedb.org/3/discover/${type}?api_key=5417af578f487448df0d4932bc0cc1a5&language=pt-BR&with_genres=${param}&sort_by=popularity.desc&page=`;
@@ -51,7 +52,7 @@ function usePageHome(params: Props) {
     const dataFilter = isData?.filter((item: any) =>    
       trendingTitle.includes(item.title.toLowerCase())
     );   
-    if(dataFilter) setData(dataFilter);    
+    if(dataFilter) setTimeout(()=>setData(dataFilter),50);    
   }
 
   useEffect(() => {
@@ -91,7 +92,7 @@ function usePageHome(params: Props) {
     start();  
   }, [input]);
 
-  return { data, type, input, setInput, dataFilter };
+  return { data, type, input, setData, setInput, dataFilter };
 }
 
 export default usePageHome;
