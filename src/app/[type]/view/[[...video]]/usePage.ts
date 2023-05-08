@@ -11,7 +11,7 @@ interface Props {
 }
 function usePageVideo(params: Props) {
   const [episodes, setEpisodes] = useState<any[] | null>(null);
-  const [episode, setEpisode] = useState<any | null>(null);
+  const [episode, setEpisode] = useState<object | null>(null);
   const [index, setIndex] = useState(0);
 
   const { type, video } = params;
@@ -76,7 +76,7 @@ function usePageVideo(params: Props) {
     change();
   }, [index]);
 
-  return { episode, episodes, type, item, index, setIndex };
+  return { episode,setEpisode, episodes, type, item, index, setIndex };
 }
 
 export default usePageVideo;
