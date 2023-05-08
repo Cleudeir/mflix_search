@@ -13,17 +13,10 @@ async function Card({ item, type }: Props): Promise<JSX.Element | null> {
 
   const resp = await fetch(url, { next: { revalidate: 60 } });
   const json = await resp.json();
-  console.log(json);
   const data = json.results[0];
   if (!data) {
     return null;
-  }
-  console.log(data);
-  console.log(
-    "https://image.tmdb.org/t/p/w342" +
-      String(data.backdrop_path || data.poster_path)
-  );
-
+  }  
   const newLocal: number = data?.overview?.length || 0;
   return (
     data && (

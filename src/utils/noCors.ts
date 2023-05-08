@@ -4,23 +4,17 @@ async function noCors(
   init?: RequestInit | undefined
 ): Promise<any> {
   let url = "/api/" + input.split(":").join("__").replace("//", "/");  
-  if (!init) {
-    console.log(url);
+  if (!init) {   
     const resp = await fetch(url);
-    const data = await resp.json();
-    console.log(data)
-    if (data.results) {
-      console.log(data.results)
+    const data = await resp.json();  
+    if (data.results) {    
       return data.results;
     } 
     return data;
-  } else {
-    console.log(url, init);
+  } else {    
     const resp = await fetch(url, init);
-    const data = await resp.json();
-    console.log(data)
-    if (data.results) {
-      console.log(data.results)
+    const data = await resp.json();    
+    if (data.results) {     
       return data.results;
     } 
     return data;

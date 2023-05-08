@@ -37,7 +37,6 @@ function usePageHome(params: Props) {
       noCors(url + "10"),
     ]);
     const trending = PromiseTrending.flat();
-    console.log(trending);
     let trendingTitle: any[];
     if (type === "movie") {
       trendingTitle = trending.map((item: any) =>
@@ -51,17 +50,14 @@ function usePageHome(params: Props) {
     const isData = save;
     const dataFilter = isData?.filter((item: any) =>    
       trendingTitle.includes(item.title.toLowerCase())
-    );
-    console.log('dataFilter: ', dataFilter);
+    );   
     if(dataFilter) setData(dataFilter);    
   }
 
   useEffect(() => {
     async function start() {
       let url = `${process.env.NEXT_PUBLIC_BACK_URL}/map/${type}`;
-      console.log(url);
       const respMap = await noCors(url);
-      console.log(respMap)
       if(!respMap.error){
         setSave(respMap);
       }      
@@ -92,8 +88,7 @@ function usePageHome(params: Props) {
         setData(filter.slice(0, 30));
       }
     }
-    start();
-    console.log(input);
+    start();  
   }, [input]);
 
   return { data, type, input, setInput, dataFilter };

@@ -20,7 +20,6 @@ export default function Home({ params }: Props): JSX.Element {
     <div className="flex flex-row flex-wrap justify-center items-center bg-slate-700 w-full min-h-screen p-1">
       {data &&
         data.map((item: any) => {
-          console.log(item)
           return (
             <Suspense  key={item.url}>
               {/* @ts-expect-error Server Component */} 
