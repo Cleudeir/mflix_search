@@ -20,6 +20,13 @@ export interface Props {
 export default function Video({ params }: Props): JSX.Element  | null | undefined {
   const { episode,setEpisode, episodes, item, type, setIndex, index } =
     usePageVideo(params);
+    if( !episodes){
+      return (
+      <div className="bg-slate-700 w-screen h-screen">
+        <Loading />
+      </div>
+      )
+    }
   return (
     episodes && item && (
       <div

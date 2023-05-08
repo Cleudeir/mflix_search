@@ -32,7 +32,8 @@ function usePageVideo(params: Props) {
             method: "POST",
             body: JSON.stringify(item),
           }
-        );  
+        );
+        setEpisodes([movie]);
         setEpisode(movie);
       } else if (type === "tv") {
         let _episodes = await noCors(
@@ -76,7 +77,7 @@ function usePageVideo(params: Props) {
     change();
   }, [index]);
 
-  return { episode,setEpisode, episodes, type, item, index, setIndex };
+  return { episode, setEpisode, episodes, type, item, index, setIndex };
 }
 
 export default usePageVideo;
