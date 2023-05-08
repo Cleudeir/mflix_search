@@ -33,7 +33,7 @@ export default function Video({ params }: Props): JSX.Element  | null | undefine
         className={`bg-slate-700 flex flex-col items-center justify-center w-screen h-screen font-bold  text-xs `}
       >
         <div
-          className={`flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-md p-2 mb-[-70px] text-white `}
+          className={`flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-md p-2 mb-[-55px] text-white `}
         >
           <Link href={`${type}`}>
             <button
