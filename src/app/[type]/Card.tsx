@@ -23,7 +23,7 @@ async function Card({ item, type }: Props): Promise<JSX.Element | null> {
       <Link
         href={"/" + type + "/view/" + data.id + item.url.replace(".html", "")}
       >
-        <div className="group relative flex-col items-center justify-start p-0 m-1 w-96 h-64 rounded-lg text-black  bg-gray-300 shadow transition-all duration-300 scale-95 hover:scale-100 border-2">
+        <div className="group relative flex-col items-center justify-start p-0 m-1 max-w-[97vw] w-96 h-64 rounded-lg text-black  bg-gray-300 shadow transition-all duration-300 scale-95 hover:scale-100 border-2">
           <img
             className="w-full h-full object-cover object-center rounded-lg"
             src={
