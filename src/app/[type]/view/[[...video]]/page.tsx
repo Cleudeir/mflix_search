@@ -17,12 +17,11 @@ export interface Props {
   params: any;
 }
 
-export default function Video({ params }: Props): JSX.Element {
+export default function Video({ params }: Props): JSX.Element  | null | undefined {
   const { episode,setEpisode, episodes, item, type, setIndex, index } =
     usePageVideo(params);
-
   return (
-    episodes &&    item && (
+    episodes && item && (
       <div
         className={`bg-slate-700 flex flex-col items-center justify-center w-screen h-screen font-bold  text-xs `}
       >
