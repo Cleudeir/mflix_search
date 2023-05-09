@@ -9,7 +9,7 @@ function usePageHome(type: "movie" | "tv", save : any[]) {
   console.log('save: ', save);
   const [data, setData] = useState<null | any[]>(null);
   const [input, setInput] = useState<string>("");
-  const [error, setError] = useState<string>(null);
+  const [error, setError] = useState<string | null>(null);
   async function dataFilter(
     mode: "category" | "popular",
     param?: string | number
