@@ -4,7 +4,7 @@ import Card from "./Card";
 import usePageHome from "./useHome";
 import Link from "next/link";
 import Header from "./Header";
-import Loading from "../loading";
+import Loading from "@/components/loading";
 
 interface Props {
   type: "movie" | "tv";

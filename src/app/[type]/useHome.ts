@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 
 function usePageHome(type: "movie" | "tv", save : any[]) {
+  console.log('save: ', save);
   const [data, setData] = useState<null | any[]>(null);
   const [input, setInput] = useState<string>("");
 
@@ -43,8 +44,7 @@ function usePageHome(type: "movie" | "tv", save : any[]) {
         item.name.replace(/[^\w\s]/gi, "").toLowerCase()
       );
     }
-    const isData = save;
-    const dataFilter = isData?.filter((item: any) =>    
+    const dataFilter = save?.filter((item: any) =>    
       trendingTitle.includes(item.title.toLowerCase())
     );   
     if(dataFilter) setTimeout(()=>setData(dataFilter),50);    

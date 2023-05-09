@@ -1,11 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
-import noCors from "@/utils/noCors";
-import { Movie } from "@/app/interfaces/Movie";
-import { Tv } from "@/app/interfaces/Tv";
 import Link from "next/link";
 import usePageVideo from "./usePage";
-import Loading from "../../../loading";
+import Loading from "../../../../components/loading";
 
 export interface episode {
   id: number;
