@@ -9,7 +9,7 @@ export default async function HomePage({
 }: Props): Promise<JSX.Element> {
   const type = params.type;
   const url = `${process.env.NEXT_PUBLIC_BACK_URL}/map/${type}`;
-  const resp = await fetch(url);
+  const resp = await fetch(url,{next:{revalidate:24*60*60}});
   const save = await resp.json();
   return (<Home save={save} type={type} />);
 }

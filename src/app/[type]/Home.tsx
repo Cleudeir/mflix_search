@@ -7,14 +7,12 @@ import Header from "./Header";
 import Loading from "../loading";
 
 interface Props {
-  type: "movie" | "tv",
-  save: any[]
+  type: "movie" | "tv";
+  save: any[];
 }
 
 export default function Home({ type, save }: Props): JSX.Element {
-  console.log(type, save);
-  const { data, setData, input, setInput, dataFilter } =
-    usePageHome(type);
+  const { data, setData, input, setInput, dataFilter } = usePageHome(type , save);
 
   return (
     <div className="min-h-screen bg-slate-700">

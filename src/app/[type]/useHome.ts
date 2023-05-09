@@ -4,9 +4,8 @@ import noCors from "@/utils/noCors";
 import { useEffect, useState } from "react";
 
 
-function usePageHome(type: "movie" | "tv") {
+function usePageHome(type: "movie" | "tv", save : any[]) {
   const [data, setData] = useState<null | any[]>(null);
-  const [save, setSave] = useState<null | any[]>(null);
   const [input, setInput] = useState<string>("");
 
   async function dataFilter(
@@ -50,19 +49,6 @@ function usePageHome(type: "movie" | "tv") {
     );   
     if(dataFilter) setTimeout(()=>setData(dataFilter),50);    
   }
-
-  useEffect(() => {
-    async function start() {
-      let url = `${process.env.NEXT_PUBLIC_BACK_URL}/map/${type}`;
-      const respMap = await noCors(url);
-      if(!respMap.error){
-        setSave(respMap);
-      }      
-    }
-    if (type) {
-      start();
-    }
-  }, []);
 
   useEffect(() => {
     async function start() {
