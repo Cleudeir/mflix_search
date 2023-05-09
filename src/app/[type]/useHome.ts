@@ -2,13 +2,14 @@
 "use client";
 import noCors from "@/utils/noCors";
 import { useEffect, useState } from "react";
+import { isNullishCoalesce } from "typescript";
 
 
 function usePageHome(type: "movie" | "tv", save : any[]) {
   console.log('save: ', save);
   const [data, setData] = useState<null | any[]>(null);
   const [input, setInput] = useState<string>("");
-
+  const [error, setError] = useState<string>(null);
   async function dataFilter(
     mode: "category" | "popular",
     param?: string | number
@@ -64,17 +65,25 @@ function usePageHome(type: "movie" | "tv", save : any[]) {
 
   useEffect(() => {
     async function start() {
+      setData(null);
       if (save) {
         const filter = save.filter((x: any) =>
           x.title.toLowerCase().includes(input.toLowerCase())
         );
-        setData(filter.slice(0, 30));
+        const slice = filter.slice(0, 30)
+        if(slice.length > 0){
+          setError(null)
+          setTimeout(()=>setData(slice),50); 
+        }else{ 
+          setError("Nada Encontrado!")
+        }
+            
       }
     }
-    start();  
+    if(input !== '') start();  
   }, [input]);
 
-  return { data, input, setData, setInput, dataFilter };
+  return { error, data, input, setData, setInput, dataFilter };
 }
 
 export default usePageHome;

@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function Home({ type, save }: Props): JSX.Element {
-  const { data, setData, input, setInput, dataFilter } = usePageHome(
+  const { error, data, setData, input, setInput, dataFilter } = usePageHome(
     type,
     save
   );
@@ -26,7 +26,7 @@ export default function Home({ type, save }: Props): JSX.Element {
         setInput={setInput}
       />
       <div className="flex flex-row flex-wrap justify-center items-center  w-full p-1 min-h-[calc(100vh-54px)]">
-        <Suspense>
+        <Suspense fallback={<Loading />}>
           {data &&
             data.map((item: any) => {
               return (
@@ -36,8 +36,9 @@ export default function Home({ type, save }: Props): JSX.Element {
                 </div>
               );
             })}
+          {error && <h2 className="text-white">{error}</h2>}
         </Suspense>
-        {!data && <Loading />}
+        {!data && !error && <Loading />}
       </div>
     </div>
   );
