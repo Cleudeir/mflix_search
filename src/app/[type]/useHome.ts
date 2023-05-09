@@ -3,12 +3,8 @@
 import noCors from "@/utils/noCors";
 import { useEffect, useState } from "react";
 
-interface Props {
-  type: "movie" | "tv";
-}
 
-function usePageHome(params: Props) {
-  const type = params.type;
+function usePageHome(type: "movie" | "tv") {
   const [data, setData] = useState<null | any[]>(null);
   const [save, setSave] = useState<null | any[]>(null);
   const [input, setInput] = useState<string>("");
@@ -92,7 +88,7 @@ function usePageHome(params: Props) {
     start();  
   }, [input]);
 
-  return { data, type, input, setData, setInput, dataFilter };
+  return { data, input, setData, setInput, dataFilter };
 }
 
 export default usePageHome;
