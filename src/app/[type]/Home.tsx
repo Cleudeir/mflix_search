@@ -12,7 +12,10 @@ interface Props {
 }
 
 export default function Home({ type, save }: Props): JSX.Element {
-  const { data, setData, input, setInput, dataFilter } = usePageHome(type , save);
+  const { data, setData, input, setInput, dataFilter } = usePageHome(
+    type,
+    save
+  );
 
   return (
     <div className="min-h-screen bg-slate-700">
@@ -23,17 +26,17 @@ export default function Home({ type, save }: Props): JSX.Element {
         setInput={setInput}
       />
       <div className="flex flex-row flex-wrap justify-center items-center  w-full p-1 min-h-[calc(100vh-54px)]">
-        {data &&
-          data.map((item: any) => {
-            return (
-              <Suspense key={item.url}>
-                <div onClick={() => setData(null)}>
+        <Suspense>
+          {data &&
+            data.map((item: any) => {
+              return (
+                <div key={item.url} onClick={() => setData(null)}>
                   {/* @ts-expect-error Server Component */}
                   <Card item={item} type={type} />
                 </div>
-              </Suspense>
-            );
-          })}
+              );
+            })}
+        </Suspense>
         {!data && <Loading />}
       </div>
     </div>
