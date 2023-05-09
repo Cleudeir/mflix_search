@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import { isNullishCoalesce } from "typescript";
 
 
-function usePageHome(type: "movie" | "tv", save : any[]) {
-  console.log('save: ', save);
+function usePageHome(type: "movie" | "tv", save : any[]) {;
   const [data, setData] = useState<null | any[]>(null);
   const [input, setInput] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -48,7 +47,12 @@ function usePageHome(type: "movie" | "tv", save : any[]) {
     const dataFilter = save?.filter((item: any) =>    
       trendingTitle.includes(item.title.toLowerCase())
     );   
-    if(dataFilter) setTimeout(()=>setData(dataFilter),50);    
+    if(dataFilter && dataFilter.length > 0) {
+      setError(null)
+      setTimeout(()=>setData(dataFilter),50)
+    } else{
+      setError("Nada Encontrado!")
+    }
   }
 
   useEffect(() => {

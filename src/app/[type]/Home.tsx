@@ -28,9 +28,9 @@ export default function Home({ type, save }: Props): JSX.Element {
       <div className="flex flex-row flex-wrap justify-center items-center  w-full p-1 min-h-[calc(100vh-54px)]">
         <Suspense fallback={<Loading />}>
           {data &&
-            data.map((item: any) => {
+            data.map((item: any, index:number) => {
               return (
-                <div key={item.url} onClick={() => setData(null)}>
+                <div key={item.url+index} onClick={() => setData(null)}>
                   {/* @ts-expect-error Server Component */}
                   <Card item={item} type={type} />
                 </div>

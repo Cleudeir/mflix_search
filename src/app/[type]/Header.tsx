@@ -1,4 +1,3 @@
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -6,24 +5,30 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import genres from "../utils/genres";
+
 interface Props {
   dataFilter: (mode: "category" | "popular", param?: string | number) => void;
-  type: "movie" | "tv"
+  type: "movie" | "tv";
   input: string;
-  setInput: (value:string ) => void;
+  setInput: (value: string) => void;
 }
-function Header({ dataFilter, type , input , setInput}: Props) {
+function Header({ dataFilter, type, input, setInput }: Props) {
   return (
-    <Navbar bg="ligth" expand={"xl"} className="h-[50px] bg-white mb-1 text-black">
+    <Navbar
+      collapseOnSelect
+      bg="ligth"
+      expand={"xxl"}
+      className="h-[50px] bg-white mb-1 text-black"
+    >
       <Container fluid>
         <Navbar.Brand href="#">Mflix Search</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"xl"}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${"xl"}`}
           aria-labelledby={`offcanvasNavbarLabel-expand-${"xl"}`}
-          placement="end"          
+          placement="end"
         >
-          <Offcanvas.Header closeButton >
+          <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${"xl"}`}>
               Menu
             </Offcanvas.Title>
@@ -36,14 +41,22 @@ function Header({ dataFilter, type , input , setInput}: Props) {
                 title="Categorias"
                 id={`offcanvasNavbarDropdown-expand-${"xl"}`}
               >
-                {genres[type].map(({ id, name }: { id: number; name: string }) => (
-                  <NavDropdown.Item
-                    key={id}
-                    onClick={() => dataFilter("category", id)}
-                  >
-                    {name}
-                  </NavDropdown.Item>
-                ))}
+                {genres[type].map(
+                  ({ id, name }: { id: number; name: string }) => (
+                    <NavDropdown.Item
+                      key={id}
+                      onClick={() => {
+                        const element: HTMLElement | null= document?.querySelector(".btn-close")
+                        if(element){
+                          element.click()
+                        }
+                        dataFilter("category", id);
+                      }}
+                    >
+                      {name}
+                    </NavDropdown.Item>
+                  )
+                )}
               </NavDropdown>
             </Nav>
             <Form className="d-flex">
@@ -54,7 +67,7 @@ function Header({ dataFilter, type , input , setInput}: Props) {
                 aria-label="Search"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-              />              
+              />
             </Form>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
