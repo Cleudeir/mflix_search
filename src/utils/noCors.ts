@@ -13,11 +13,13 @@ async function fetchTimeout(
   ]);
 }
 
+
 async function noCors(
   input: string,
   init?: RequestInit | undefined
 ): Promise<any> {
-  let url = "/api/" + input.split(":").join("__").replace("//", "/");
+  let url = "/api" + input.split(":").join("__").replace("//", "/");
+  console.log('url: ', url);
   if (!init) {
     try {
       const resp = await fetchTimeout(url);
@@ -25,6 +27,7 @@ async function noCors(
       if (data.results) {
         return data.results;
       }
+
       return data;
     } catch (error: any) {
       return { error: error.message, url };

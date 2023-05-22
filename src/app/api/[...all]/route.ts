@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const parserUrl = (url: string) => {
-  return url
+  let _url = url
     .split("__")
     .join(":")
     .split("/")
@@ -9,6 +9,12 @@ const parserUrl = (url: string) => {
     .join("/")
     .replace("https/", "https://")
     .replace("http:/", "http://");
+  console.log('url: ', _url);
+  if (!_url.includes("http")) {
+    _url = process.env.BACK_URL + '/' + _url
+  }
+  console.log('url: ', _url);
+  return _url
 };
 
 export async function GET(request: NextRequest) {

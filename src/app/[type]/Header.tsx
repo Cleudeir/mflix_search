@@ -5,19 +5,21 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import genres from "../utils/genres";
+import { Button } from "react-bootstrap";
 
 interface Props {
-  dataFilter: (mode: "category" | "popular", param?: string | number) => void;
+  dataFilter: (genreId: number) => void;
   type: "movie" | "tv";
   input: string;
+  search: () => void;
   setInput: (value: string) => void;
 }
-function Header({ dataFilter, type, input, setInput }: Props) {
+function Header({ dataFilter, type, input, setInput, search }: Props) {
   return (
     <Navbar
       collapseOnSelect
       bg="ligth"
-      expand={"xxl"}
+      expand={"sm"}
       className="h-[50px] bg-white mb-1 text-black"
     >
       <Container fluid>
@@ -46,12 +48,13 @@ function Header({ dataFilter, type, input, setInput }: Props) {
                     <NavDropdown.Item
                       key={id}
                       onClick={() => {
-                        const element: HTMLElement | null= document?.querySelector(".btn-close")
-                        if(element){
+                        const element: HTMLElement | null = document?.querySelector(".btn-close")
+                        if (element) {
                           element.click()
                         }
-                        dataFilter("category", id);
-                      }}
+                        dataFilter(id);
+                      }
+                      }
                     >
                       {name}
                     </NavDropdown.Item>
@@ -68,6 +71,13 @@ function Header({ dataFilter, type, input, setInput }: Props) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />
+              <Button onClick={(e) => {
+                search()
+                const element: HTMLElement | null = document?.querySelector(".btn-close")
+                if (element) {
+                  element.click()
+                }
+              }} variant="outline-success">Search</Button>
             </Form>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
