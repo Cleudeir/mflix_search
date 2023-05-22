@@ -19,7 +19,6 @@ async function noCors(
   init?: RequestInit | undefined
 ): Promise<any> {
   let url = "/api" + input.split(":").join("__").replace("//", "/");
-  console.log('url: ', url);
   if (!init) {
     try {
       const resp = await fetchTimeout(url);

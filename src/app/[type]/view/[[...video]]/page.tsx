@@ -23,6 +23,7 @@ export default function Video({ params }: Props): JSX.Element  | null | undefine
       </div>
       )
     }
+   
   return (
     episodes && item && (
       <div
@@ -90,13 +91,13 @@ export default function Video({ params }: Props): JSX.Element  | null | undefine
             ""
           )}
         </div>
-        {episode && (
+        {episode && (             
           <iframe
             frameBorder={0}
-            src={"https://sinalpublico.com" + episode.url}
+            src={episode.url}
             allowFullScreen={false}
             className="w-screen h-screen"
-          />
+          />       
         )}
         {!episode && (
           <div className="bg-slate-700 w-screen h-screen">

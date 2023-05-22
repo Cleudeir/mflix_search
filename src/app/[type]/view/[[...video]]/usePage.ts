@@ -87,6 +87,9 @@ function usePageVideo(params: Props) {
     }
     change();
   }, [index]);
+  useEffect(() => {
+    if(episode && episode.url ) console.log("episode: " + episode.url)
+  }, [episode]);
 
   return { episode, setEpisode, episodes, type, item, index, setIndex };
 }
