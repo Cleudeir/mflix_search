@@ -18,19 +18,16 @@ function usePageVideo(params: Props) {
 
   const { type, video } = params;
   const [id, url] = video;
-  console.log('id, url: ', id, url);
   let item: Tv | Movie | undefined;
- 
+
   if (type === "movie") {
     item = urlTransformMovie(url, id);
   } else if (type === "tv") {
     item = urlTransformTv(url, id);
   }
-  console.log('item: ', item);
-
 
   useEffect(() => {
-    async function start() { 
+    async function start() {
       if (type === "movie") {
         const movie = await noCors(
           `/info/${type}`,
@@ -40,21 +37,21 @@ function usePageVideo(params: Props) {
           }
         );
         console.log(movie);
-        if(movie.error){
+        if (movie.error) {
           //return route.push(`/${type}`)
         }
         setEpisodes([movie]);
         setEpisode(movie);
       } else if (type === "tv") {
-        let _episodes = await noCors(          
+        let _episodes = await noCors(
           `/list/${type}`,
           {
             method: "POST",
             body: JSON.stringify(item),
           }
         );
-        console.log('_episodes: ', _episodes);
-        if(_episodes.error){
+
+        if (_episodes.error) {
           return route.push(`/${type}`)
         }
         setEpisodes(_episodes);
@@ -66,8 +63,7 @@ function usePageVideo(params: Props) {
             body: JSON.stringify(_item),
           }
         );
-        console.log("_episode:",_episode);
-        if(_episode.error){
+        if (_episode.error) {
           return route.push(`/${type}`)
         }
         setEpisode(_episode);
@@ -75,13 +71,12 @@ function usePageVideo(params: Props) {
     }
     if (item && id && url) {
       start();
-      console.log('start();: ');
     }
   }, []);
 
   useEffect(() => {
     async function change() {
-      if (episodes) {    
+      if (episodes) {
         const _item = episodes[index];
         const _episode = await noCors(
           `/info/${type}`,
@@ -96,7 +91,7 @@ function usePageVideo(params: Props) {
     change();
   }, [index]);
   useEffect(() => {
-    if(episode && episode.url ) console.log("episode: " + episode.url)
+    if (episode && episode.url) console.log("episode: " + episode.url)
   }, [episode]);
 
   return { episode, setEpisode, episodes, type, item, index, setIndex };
