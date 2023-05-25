@@ -2,9 +2,9 @@
 "use client";
 import { Movie } from "@/app/interfaces/Movie";
 import { Tv } from "@/app/interfaces/Tv";
-import noCors from "@/utils/noCors";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import noCors from "@/app/utils/noCors";
 
 interface Props {
   type: "movie" | "tv";

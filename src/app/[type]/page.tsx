@@ -1,14 +1,14 @@
-import Home from "./Home";
+import HomePage from "../components/common/HomePage";
+
 interface Props {
   params: {
     type: "movie" | "tv";
   };
 }
-export default async function HomePage({
+export default async function HomeDefault({
   params,
 }: Props): Promise<JSX.Element> {
   const type = params.type;
-  console.log(params);
   const resp2 = await fetch(`${process.env.BACK_URL}/tmdb/popular/${type}`,
     {
       method: "POST",
@@ -18,12 +18,9 @@ export default async function HomePage({
       },
       body: JSON.stringify({
         type
-      }),
-      cache:"no-cache"      
+      })    
     }
   )
   const trending = await resp2.json()
-  //console.log('trending: ', trending);
-
-  return (<Home save={trending} type={type} />);
+  return (<HomePage save={trending} type={type} />);
 }

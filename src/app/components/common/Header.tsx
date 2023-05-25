@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import genres from "../utils/genres";
+import genres from "../../utils/genres";
 import { Button } from "react-bootstrap";
 
 interface Props {
@@ -46,13 +46,13 @@ function Header({ dataFilter, type, input, setInput, search }: Props) {
                 {genres[type].map(
                   ({ id, name }: { id: number; name: string }) => (
                     <NavDropdown.Item
+                      href={`/${type}/category/${id}`}
                       key={id}
                       onClick={() => {
                         const element: HTMLElement | null = document?.querySelector(".btn-close")
                         if (element) {
                           element.click()
                         }
-                        dataFilter(id);
                       }
                       }
                     >

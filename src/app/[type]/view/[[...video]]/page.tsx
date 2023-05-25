@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import usePageVideo from "./usePage";
-import Loading from "../../../../components/loading";
+import Loading from "../../../components/common/loading";
 
 export interface episode {
   id: number;

@@ -3,14 +3,14 @@ import React, { Suspense } from "react";
 import Card from "./Card";
 import usePageHome from "./useHome";
 import Header from "./Header";
-import Loading from "@/components/loading";
+import Loading from "./loading";
 
 interface Props {
   type: "movie" | "tv";
   save: any[];
 }
 
-export default function Home({ type, save }: Props): JSX.Element {
+export default function HomePage({ type, save }: Props): JSX.Element {
   const { error, data, setData, input, setInput, dataFilter, search } = usePageHome(
     type,
     save
