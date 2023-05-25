@@ -30,7 +30,7 @@ export default function Home({ type, save }: Props): JSX.Element {
           {data &&
             data.map((item: any, index: number) => {
               return (
-                <div key={item.id + index+ item.url} onClick={() => setData(null)}>
+                <div key={item.url + index} onClick={() => setData(null)}>
                   {/* @ts-expect-error Server Component */}
                   <Card item={item} type={type} />
                 </div>

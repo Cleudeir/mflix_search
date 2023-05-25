@@ -18,12 +18,16 @@ function usePageVideo(params: Props) {
 
   const { type, video } = params;
   const [id, url] = video;
+  console.log('id, url: ', id, url);
   let item: Tv | Movie | undefined;
+ 
   if (type === "movie") {
     item = urlTransformMovie(url, id);
   } else if (type === "tv") {
     item = urlTransformTv(url, id);
   }
+  console.log('item: ', item);
+
 
   useEffect(() => {
     async function start() { 
@@ -35,19 +39,21 @@ function usePageVideo(params: Props) {
             body: JSON.stringify(item),
           }
         );
+        console.log(movie);
         if(movie.error){
-          return route.push(`/${type}`)
+          //return route.push(`/${type}`)
         }
         setEpisodes([movie]);
         setEpisode(movie);
       } else if (type === "tv") {
-        let _episodes = await noCors(
+        let _episodes = await noCors(          
           `/list/${type}`,
           {
             method: "POST",
             body: JSON.stringify(item),
           }
         );
+        console.log('_episodes: ', _episodes);
         if(_episodes.error){
           return route.push(`/${type}`)
         }
@@ -60,6 +66,7 @@ function usePageVideo(params: Props) {
             body: JSON.stringify(_item),
           }
         );
+        console.log("_episode:",_episode);
         if(_episode.error){
           return route.push(`/${type}`)
         }
@@ -68,6 +75,7 @@ function usePageVideo(params: Props) {
     }
     if (item && id && url) {
       start();
+      console.log('start();: ');
     }
   }, []);
 

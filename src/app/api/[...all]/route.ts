@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
         Accept: "application/json",
         "Content-type": "application/json; charset=UTF-8",
       },
+      cache:"no-cache"
     });
     const data = await res.json();
     return NextResponse.json(data);

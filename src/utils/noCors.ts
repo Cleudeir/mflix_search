@@ -3,7 +3,7 @@
 async function fetchTimeout(
   url: RequestInfo | URL,
   options?: RequestInit | undefined,
-  timeout = 10000
+  timeout = 100000
 ): Promise<any> {
   return await Promise.race([
     fetch(url, options),
