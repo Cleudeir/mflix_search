@@ -8,6 +8,7 @@ export interface Tv {
     genre_ids?: number[]
     original_language?: string
     original_title?: string
+    original_name?: string
     overview?: string
     popularity?: string
     poster_path?: string

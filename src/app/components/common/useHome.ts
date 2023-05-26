@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import noCors from "@/utils/noCors";
 import { useEffect, useState } from "react";
 
 export interface categoryProps {
@@ -16,7 +15,7 @@ function usePageHome(type: "movie" | "tv", save: any[]) {
     setData(save)
   },[])
 
-  function search(e) {
+  function search(e: any) {
     e.preventDefault()
     const input = e.target.value  
     if (input !== '') {

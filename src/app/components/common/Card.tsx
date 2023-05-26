@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+import { Movie } from "@/app/interfaces/Movie";
 import { Tv } from "@/app/interfaces/Tv";
-import { Movie } from "../interfaces/Movie";
 import Link from "next/link";
 
 interface Props {
-  item: Tv | Movie;
+  item: Tv | Movie ;
   type: "movie" | "tv";
 }
 
@@ -26,7 +26,7 @@ async function Card({ item, type }: Props): Promise<JSX.Element | null> {
           <div className="w-full max-h-full absolute bottom-0 text-justify left-0 transition-all duration-300 rounded-lg bg-black text-white bg-opacity-90 text-ellipsis overflow-hidden ">
             <div className="flex flex-row justify-between gap-4  px-4 py-1 text-shadow  bg-opacity-30 font-bold">
               <div>{item.title || item.original_title || item.original_name}</div>
-              <div>⭐{Math.round(item.vote_average * 10) / 10}</div>
+              <div>⭐{Math.round((item.vote_average || 0) * 10) / 10}</div>
             </div>
             <div
               className="hidden h-80 group-hover:block group-hover:transition-all group-hover:duration-300
