@@ -38,7 +38,7 @@ function usePageVideo(params: Props) {
         );
         console.log(movie);
         if (movie.error) {
-          //return route.push(`/${type}`)
+          return route.push(`/${type}`)
         }
         setEpisodes([movie]);
         setEpisode(movie);

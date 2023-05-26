@@ -1,3 +1,4 @@
+'use client'
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -5,22 +6,20 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import genres from "../../utils/genres";
-import { Button } from "react-bootstrap";
+
 
 interface Props {
-  dataFilter: (genreId: number) => void;
   type: "movie" | "tv";
-  input: string;
-  search: () => void;
-  setInput: (value: string) => void;
+  search: (e: any) => void;
 }
-function Header({ dataFilter, type, input, setInput, search }: Props) {
+function Header({ type, search }: Props) {
   return (
+    
     <Navbar
       collapseOnSelect
       bg="ligth"
       expand={"sm"}
-      className="h-[50px] bg-white mb-1 text-black"
+      className="h-[50px] bg-white  text-xl text-black "
     >
       <Container fluid>
         <Navbar.Brand href="#">Mflix Search</Navbar.Brand>
@@ -36,7 +35,7 @@ function Header({ dataFilter, type, input, setInput, search }: Props) {
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
+            <Nav className="justify-content-end flex-grow-1 sm:items-center ">
               <Nav.Link href="/movie">Filmes</Nav.Link>
               <Nav.Link href="/tv">Series</Nav.Link>
               <NavDropdown
@@ -62,22 +61,27 @@ function Header({ dataFilter, type, input, setInput, search }: Props) {
                 )}
               </NavDropdown>
             </Nav>
-            <Form className="d-flex">
+            <Form className="d-flex py-2">
               <Form.Control
                 type="search"
+                id='input'
                 placeholder="Buscar"
                 className="me-2"
                 aria-label="Search"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={(e)=>{search(e)}}
               />
-              <Button onClick={(e) => {
-                search()
+              <button 
+              type='button'
+              className="sm:hidden border-2 rounded-lg px-2 hover:bg-lime-600 hover:text-white"
+              onClick={() => {               
                 const element: HTMLElement | null = document?.querySelector(".btn-close")
                 if (element) {
-                  element.click()
+                 element.click()
                 }
-              }} variant="outline-success">Search</Button>
+              }} 
+              >
+                Search
+                </button>
             </Form>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
