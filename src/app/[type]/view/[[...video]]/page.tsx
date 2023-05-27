@@ -31,7 +31,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
       <div
         className={`
         group flex bg-slate-700  flex-col portrait:rotate-90 items-center justify-center w-screen h-screen font-bold text-xs 
-        portrait:w-[100vh] portrait:overflow-hidden portrait:h-[100vw] portrait:mt-[-100vw] portrait: portrait:mb-0 mx-0 origin-bottom-left          
+        portrait:w-[100vh] portrait:h-[100vw] portrait:overflow-hidden portrait:mt-[-100vw] origin-bottom-left          
         `}
 
       >
