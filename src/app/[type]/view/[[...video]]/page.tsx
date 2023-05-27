@@ -31,12 +31,12 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
         className={`bg-slate-700 flex av flex-col portrait:rotate-90 portrait:w-[100vh] portrait:h-[100vw] portrait:mt-[-100vw] object-cover origin-bottom-left items-center justify-center w-screen h-screen font-bold text-xs `}
       >
         <div
-          className={`flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-md p-2 mb-[-55px] text-white `}
+          className={`flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-sm p-2 mb-[-55px] text-white `}
         >
-          <Link href={`${type}`}>
+          <Link href={localStorage.getItem('page') || `${type}`}>
             <button
               type="button"
-              className="cursor-pointer h-10 w-12 mx-2 bg-gray-700 text-white font-bold rounded-md"
+              className="cursor-pointer h-10 w-12 mx-2 bg-gray-700 text-white font-bold rounded-sm"
             >
               Home
             </button>
@@ -47,7 +47,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
           {type === "tv" ? (
             <div className="flex flex-row">             
               <Dropdown >
-                <Dropdown.Toggle  variant="success" id="dropdown-basic">
+                <Dropdown.Toggle  className="!bg-gray-700 !border-gray-700 !rounded-sm"  id="dropdown-basic">
                 {episodes.filter(x=> x.id === index)[0].name}
                 </Dropdown.Toggle>                
                 <Dropdown.Menu  className="!min-w-full portrait:!min-h-full overflow-auto portrait:!max-h-[50vw] !max-h-[50vh]">
@@ -66,7 +66,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
 
               <button
                 type="button"
-                className="cursor-pointer h-10 w-12 mx-2 text-white bg-gray-700 font-bold rounded-md"
+                className="cursor-pointer h-10 w-12 mx-2 text-white bg-gray-700 font-bold rounded-sm"
                 onClick={() => {
                   if (index > 0) {
                     setEpisode(null)
@@ -78,7 +78,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
               </button>
               <button
                 type="button"
-                className="cursor-pointer h-10 w-12 text-white bg-gray-700 font-bold rounded-md"
+                className="cursor-pointer h-10 w-12 text-white bg-gray-700 font-bold rounded-sm"
                 onClick={() => {
                   if (episodes && index < episodes.length - 1) {
                     setEpisode(null)

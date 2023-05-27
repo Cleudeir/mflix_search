@@ -10,7 +10,6 @@ interface Props {
 
 async function Card({ item, type }: Props): Promise<JSX.Element | null> {
   const newLocal: number = item?.overview?.length || 0;
-  console.log('item: ', item);
   return (
     item && (
       <Link

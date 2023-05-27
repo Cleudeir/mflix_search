@@ -4,6 +4,7 @@ import Card from "./Card";
 import usePageHome from "./useHome";
 import Header from "./Header";
 import Loading from "./loading";
+import { usePathname } from "next/navigation";
 
 interface Props {
   type: "movie" | "tv";
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export default function HomePage({ type, save }: Props): JSX.Element {
+  const pathname = usePathname()
+  console.log('pathname: ', pathname);
   const { error, data, setData, search } = usePageHome(
     type,
     save
@@ -36,7 +39,10 @@ export default function HomePage({ type, save }: Props): JSX.Element {
                     if (!exists) {
                       localStorage.setItem(String(`${type}_watched`), JSON.stringify([item, ...list]))
                     }
+                  } else {
+                    localStorage.setItem(String(`${type}_watched`), JSON.stringify([item]))
                   }
+                  localStorage.setItem(String(`page`), pathname)
                   setData(null)
                 }}>
                   {/* @ts-expect-error Server Component */}
