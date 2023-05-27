@@ -18,7 +18,8 @@ export default async function HomeDefault({
       },
       body: JSON.stringify({
         type
-      })    
+      }),
+      next: { revalidate: 24 * 60 * 60 }
     }
   )
   const trending = await resp2.json()

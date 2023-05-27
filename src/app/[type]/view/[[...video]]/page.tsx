@@ -13,21 +13,21 @@ export interface Props {
   params: any;
 }
 
-export default function Video({ params }: Props): JSX.Element  | null | undefined {
-  const { episode,setEpisode, episodes, item, type, setIndex, index } =
+export default function Video({ params }: Props): JSX.Element | null | undefined {
+  const { episode, setEpisode, episodes, item, type, setIndex, index } =
     usePageVideo(params);
-    if( !episodes){
-      return (
+  if (!episodes) {
+    return (
       <div className="bg-slate-700 w-screen h-screen">
         <Loading />
       </div>
-      )
-    }
-   
+    )
+  }
+
   return (
     episodes && item && (
       <div
-        className={`bg-slate-700 flex flex-col items-center justify-center w-screen h-screen font-bold  text-xs `}
+        className={`bg-slate-700 flex av flex-col portrait:rotate-90 portrait:w-[100vh] portrait:h-[100vw] portrait:mt-[-100vw] object-cover origin-bottom-left items-center justify-center w-screen h-screen font-bold text-xs `}
       >
         <div
           className={`flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-md p-2 mb-[-55px] text-white `}
@@ -56,7 +56,7 @@ export default function Video({ params }: Props): JSX.Element  | null | undefine
               >
                 {episodes &&
                   episodes.map((_item, key) => (
-                    <option key={key} value={_item.id}>
+                    <option key={key} className="" value={_item.id}>
                       {_item.name || _item.id + 1}
                     </option>
                   ))}
@@ -91,13 +91,13 @@ export default function Video({ params }: Props): JSX.Element  | null | undefine
             ""
           )}
         </div>
-        {episode && (             
+        {episode && (
           <iframe
             frameBorder={0}
             src={episode.url}
             allowFullScreen={false}
             className="w-screen h-screen"
-          />       
+          />
         )}
         {!episode && (
           <div className="bg-slate-700 w-screen h-screen">
