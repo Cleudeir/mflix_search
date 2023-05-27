@@ -55,8 +55,8 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
           </Link>
 
           {type === "tv" ? (
-            <div className="relative flex flex-row flex-nowrap">
-              <Dropdown >
+            <div className="flex flex-row flex-nowrap">
+              <Dropdown className="relative ">
                 <Dropdown.Toggle className="!bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm" id="dropdown-basic">
                   {episodes.filter(x => x.id === index)[0].name}
                 </Dropdown.Toggle>
