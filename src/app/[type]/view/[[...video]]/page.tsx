@@ -24,7 +24,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
       </div>
     )
   }
-  const styleButton = "cursor-pointer h-[38px] w-[52px] ml-1 bg-gray-700 text-white font-bold rounded-sm"
+  const styleButton = "cursor-pointer h-[34px] w-[52px] ml-1 bg-gray-700 text-white font-bold rounded-sm"
 
   return (
     episodes && item && (
@@ -33,7 +33,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
       
       >
         <div
-          className={`hover:opacity-90 opacity-10 transition-opacity flex flex-row portrait:self-end items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-sm p-2 mb-[-55px] text-white `}          
+          className={`hover:opacity-90 opacity-10 transition-opacity flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-sm p-2 mb-[-55px] text-white `}          
         >
           <Link href={localStorage.getItem('page') || `${type}`}>
             <button
@@ -43,16 +43,14 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
               Home
             </button>
           </Link>
-          <div className="mx-2 text-gray-900  uppercase px-1 py-1">
-            {item.title}
-          </div>
+        
           {type === "tv" ? (
             <div className="flex flex-row">             
               <Dropdown >
-                <Dropdown.Toggle  className="!bg-gray-700 !border-gray-700  !rounded-sm"  id="dropdown-basic">
+                <Dropdown.Toggle  className="!bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm"  id="dropdown-basic">
                 {episodes.filter(x=> x.id === index)[0].name}
                 </Dropdown.Toggle>                
-                <Dropdown.Menu  className="!min-w-full portrait:!min-h-full overflow-auto portrait:!max-h-[50vw] !max-h-[50vh]">
+                <Dropdown.Menu  className="!min-w-full  portrait:!min-h-full overflow-auto portrait:!max-h-[50vw] !max-h-[50vh]">
                   {episodes &&
                     episodes.map((_item, key) => (
                       <Dropdown.Item  key={key} onClick={() => {
