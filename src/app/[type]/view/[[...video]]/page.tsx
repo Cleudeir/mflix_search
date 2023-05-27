@@ -38,9 +38,11 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
       >
         <div
           className={`
+          absolute
+          top-0
           hover:opacity-80 opacity-20 transition-opacity flex flex-row 
           items-center justify-center z-40 text-shadow bg-white bg-opacity-50 
-          rounded-sm p-2 mb-[-50px] text-white 
+          rounded-sm p-2 text-white 
           `}
         >
           <Link href={localStorage.getItem('page') || `${type}`}>
@@ -53,12 +55,12 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
           </Link>
 
           {type === "tv" ? (
-            <div className="flex flex-row p-0">
+            <div className="flex flex-row flex-nowrap">
               <Dropdown >
-                <Dropdown.Toggle className=" !bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm" id="dropdown-basic">
+                <Dropdown.Toggle className="!bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm" id="dropdown-basic">
                   {episodes.filter(x => x.id === index)[0].name}
                 </Dropdown.Toggle>
-                <Dropdown.Menu className="!min-w-full portrait:!min-h-full overflow-y-auto portrait:!max-h-[80vw] !max-h-[50vh]">
+                <Dropdown.Menu className="!min-w-full portrait:!min-h-full portrait:overflow-x-auto overflow-y-auto portrait:!max-h-[80vw] !max-h-[50vh]">
                   {episodes &&
                     episodes.map((_item, key) => (
                       <Dropdown.Item key={key} onClick={() => {
