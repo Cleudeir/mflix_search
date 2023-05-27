@@ -52,9 +52,9 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
           </Link>
 
           {type === "tv" ? (
-            <div className="flex flex-row">
+            <div className="flex flex-row relative">
               <Dropdown >
-                <Dropdown.Toggle className="!bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm" id="dropdown-basic">
+                <Dropdown.Toggle className=" !bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm" id="dropdown-basic">
                   {episodes.filter(x => x.id === index)[0].name}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="!min-w-full  portrait:!min-h-full overflow-auto portrait:!max-h-[50vw] !max-h-[50vh]">
