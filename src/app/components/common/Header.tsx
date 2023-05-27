@@ -47,8 +47,7 @@ function Header({ type, search }: Props) {
               >
                 {genres[type].map(
                   ({ id, name }: { id: number; name: string }) => (
-                    <NavDropdown.Item
-                      as={Link}
+                    <NavDropdown.Item                      
                       href={`/${type}/category/${id}`}
                       key={id}
                       onClick={() => {
