@@ -67,6 +67,15 @@ function usePageVideo(params: Props) {
           return route.push(`/${type}`)
         }
         setEpisode(_episode);
+        // smart get info
+        const _item2 = _episodes[index + 1];
+        const _episode2 = await noCors(
+          `/info/${type}`,
+          {
+            method: "POST",
+            body: JSON.stringify(_item),
+          }
+        );
       }
     }
     if (item && id && url) {

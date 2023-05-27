@@ -2,6 +2,7 @@
 import Link from "next/link";
 import usePageVideo from "./usePage";
 import Loading from "../../../components/common/loading";
+import { Dropdown } from "react-bootstrap";
 
 export interface episode {
   id: number;
@@ -56,11 +57,28 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
               >
                 {episodes &&
                   episodes.map((_item, key) => (
-                    <option key={key} className="" value={_item.id}>
+                    <option key={key} value={_item.id}>
                       {_item.name || _item.id + 1}
                     </option>
                   ))}
               </select>
+              <Dropdown >
+                <Dropdown.Toggle  variant="success" id="dropdown-basic">
+                {episodes.filter(x=> x.id === index)[0].name}
+                </Dropdown.Toggle>                
+                <Dropdown.Menu  className="!min-w-full portrait:!min-h-full overflow-auto portrait:!max-h-[50vw] !max-h-[50vh]">
+                  {episodes &&
+                    episodes.map((_item, key) => (
+                      <Dropdown.Item  key={key} onClick={() => {
+                        setEpisode(null)
+                        setIndex(Number(_item.id));
+                      }}>
+                        {_item.name || _item.id + 1}
+                      </Dropdown.Item>
+                    ))}
+                </Dropdown.Menu>
+               
+              </Dropdown>
 
               <button
                 type="button"
