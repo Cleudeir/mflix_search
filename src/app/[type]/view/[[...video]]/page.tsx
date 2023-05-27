@@ -45,23 +45,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
             {item.title}
           </div>
           {type === "tv" ? (
-            <div className="flex flex-row">
-              <select
-                className="text-center h-10 w-18 mx-2 bg-gray-700 text-white  rounded-md  cursor-pointer "
-                value={index}
-                name="select"
-                onChange={(e) => {
-                  setEpisode(null)
-                  setIndex(Number(e.target.value));
-                }}
-              >
-                {episodes &&
-                  episodes.map((_item, key) => (
-                    <option key={key} value={_item.id}>
-                      {_item.name || _item.id + 1}
-                    </option>
-                  ))}
-              </select>
+            <div className="flex flex-row">             
               <Dropdown >
                 <Dropdown.Toggle  variant="success" id="dropdown-basic">
                 {episodes.filter(x=> x.id === index)[0].name}
