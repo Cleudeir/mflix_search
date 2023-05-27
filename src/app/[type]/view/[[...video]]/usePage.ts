@@ -35,7 +35,7 @@ function usePageVideo(params: Props) {
             method: "POST",
             body: JSON.stringify(item),
           }
-        );  
+        );
         if (movie.error) {
           return route.push(`/${type}`)
         }
@@ -50,7 +50,7 @@ function usePageVideo(params: Props) {
           }
         );
         if (_episodes.error) {
-          return route.push(`/${type}`)
+          return route.push(localStorage.getItem('page') || `/${type}`)
         }
         setEpisodes(_episodes);
         let _index;
@@ -59,7 +59,7 @@ function usePageVideo(params: Props) {
           _index = Number(remember)
           setIndex(_index)
         } else {
-          _index = index          
+          _index = index
         }
         const _item = _episodes[_index];
         const _episode = await noCors(
@@ -70,7 +70,7 @@ function usePageVideo(params: Props) {
           }
         );
         if (_episode.error) {
-          return route.push(`/${type}`)
+          return route.push(localStorage.getItem('page') || `/${type}`)
         }
         setEpisode(_episode);
         const _item2 = _episodes[_index + 1];
