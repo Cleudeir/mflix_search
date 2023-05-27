@@ -29,11 +29,18 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
   return (
     episodes && item && (
       <div
-        className={`group flex bg-slate-700  flex-col portrait:rotate-90 portrait:w-[100vh] portrait:h-[100vw] portrait:mt-[-100vw] object-cover origin-bottom-left items-center justify-center w-screen h-screen font-bold text-xs `}
-      
+        className={`
+        group flex bg-slate-700  flex-col portrait:rotate-90 items-center justify-center w-screen h-screen font-bold text-xs 
+        portrait:w-[100vh] portrait:overflow-hidden portrait:h-[100vw] portrait:mt-[-100vw] portrait: portrait:mb-0 mx-0 origin-bottom-left          
+        `}
+
       >
         <div
-          className={`hover:opacity-90 opacity-10 transition-opacity flex flex-row items-center justify-center z-40 text-shadow bg-white bg-opacity-50 rounded-sm p-2 mb-[-55px] text-white `}          
+          className={`
+          hover:opacity-80 opacity-20 transition-opacity flex flex-row 
+          items-center justify-center z-40 text-shadow bg-white bg-opacity-50 
+          rounded-sm p-2 mb-[-55px] text-white 
+          `}
         >
           <Link href={localStorage.getItem('page') || `${type}`}>
             <button
@@ -43,17 +50,17 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
               Home
             </button>
           </Link>
-        
+
           {type === "tv" ? (
-            <div className="flex flex-row">             
+            <div className="flex flex-row">
               <Dropdown >
-                <Dropdown.Toggle  className="!bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm"  id="dropdown-basic">
-                {episodes.filter(x=> x.id === index)[0].name}
-                </Dropdown.Toggle>                
-                <Dropdown.Menu  className="!min-w-full  portrait:!min-h-full overflow-auto portrait:!max-h-[50vw] !max-h-[50vh]">
+                <Dropdown.Toggle className="!bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm" id="dropdown-basic">
+                  {episodes.filter(x => x.id === index)[0].name}
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="!min-w-full  portrait:!min-h-full overflow-auto portrait:!max-h-[50vw] !max-h-[50vh]">
                   {episodes &&
                     episodes.map((_item, key) => (
-                      <Dropdown.Item  key={key} onClick={() => {
+                      <Dropdown.Item key={key} onClick={() => {
                         setEpisode(null)
                         setIndex(Number(_item.id));
                       }}>
@@ -61,7 +68,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
                       </Dropdown.Item>
                     ))}
                 </Dropdown.Menu>
-               
+
               </Dropdown>
 
               <button
