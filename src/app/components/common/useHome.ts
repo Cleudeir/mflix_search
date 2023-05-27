@@ -19,13 +19,11 @@ function usePageHome(type: "movie" | "tv", save: any[]) {
     e.preventDefault()
     const input = e.target.value  
     if (input !== '') {
-      console.log('input: ', input);
       if (save) {
         const filter = save.filter((x: any) =>
           x.title.toLowerCase().includes(input.toLowerCase())
         );
-        const slice = filter.slice(0, 30)
-        console.log('slice: ', slice);
+        const slice = filter.slice(0, 30)   
         if (slice.length > 0) {
           setError(null)
           setTimeout(() => setData(slice), 50);
