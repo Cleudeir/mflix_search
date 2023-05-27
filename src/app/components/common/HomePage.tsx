@@ -13,7 +13,6 @@ interface Props {
 
 export default function HomePage({ type, save }: Props): JSX.Element {
   const pathname = usePathname()
-  console.log('pathname: ', pathname);
   const { error, data, setData, search } = usePageHome(
     type,
     save
