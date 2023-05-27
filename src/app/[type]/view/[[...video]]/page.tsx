@@ -96,7 +96,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
             frameBorder={0}
             src={episode.url}
             allowFullScreen={false}
-            className="w-screen h-screen"
+            className="w-screen h-screen portrait:w-[100vh] portrait:h-[100vw]"
           />
         )}
         {!episode && (
