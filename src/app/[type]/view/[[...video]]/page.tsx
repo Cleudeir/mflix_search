@@ -60,7 +60,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
                 <Dropdown.Toggle className="!bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm" id="dropdown-basic">
                   {episodes.filter(x => x.id === index)[0].name}
                 </Dropdown.Toggle>
-                <Dropdown.Menu className="!min-w-full portrait:!min-h-full portrait:overflow-x-auto overflow-y-auto portrait:!max-h-[50vw] !max-h-[50vh]">
+                <Dropdown.Menu className="!min-w-full portrait:!min-h-full portrait:overflow-x-auto overflow-y-auto portrait:!max-h-[80vw] !max-h-[50vh]">
                   {episodes &&
                     episodes.map((_item, key) => (
                       <Dropdown.Item key={key} onClick={() => {
