@@ -58,7 +58,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
             <div className="flex flex-row flex-nowrap relative ">
               <select className="!text-white !bg-gray-700 ml-1 !text-sm !border-gray-700  !rounded-sm"
                 value={index}
-                onClick={(e: any) => {
+                onChange={(e: any) => {
                   setEpisode(null)
                   setIndex(Number(e.target.value));
                 }}
