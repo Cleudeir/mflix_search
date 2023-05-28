@@ -2,7 +2,7 @@
 import Link from "next/link";
 import usePageVideo from "./usePage";
 import Loading from "../../../components/common/loading";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Form } from "react-bootstrap";
 
 export interface episode {
   id: number;
@@ -40,7 +40,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
           className={`
           absolute
           top-0
-          hover:opacity-80 opacity-20 transition-opacity flex flex-row 
+          hover:opacity-80 opacity-30 transition-opacity flex flex-row 
           items-center justify-center z-40 text-shadow bg-white bg-opacity-50 
           rounded-sm p-2 text-white 
           `}
@@ -55,24 +55,20 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
           </Link>
 
           {type === "tv" ? (
-            <div className="flex flex-row flex-nowrap relative">
-              <Dropdown >
-                <Dropdown.Toggle className="!bg-gray-700 ml-1  !text-sm !border-gray-700  !rounded-sm" id="dropdown-basic">
-                  {episodes.filter(x => x.id === index)[0].name}
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="!min-w-full portrait:!min-h-full portrait:overflow-x-auto overflow-y-auto portrait:!max-h-[80vw] !max-h-[50vh]">
-                  {episodes &&
-                    episodes.map((_item, key) => (
-                      <Dropdown.Item key={key} onClick={() => {
-                        setEpisode(null)
-                        setIndex(Number(_item.id));
-                      }}>
-                        {_item.name || _item.id + 1}
-                      </Dropdown.Item>
-                    ))}
-                </Dropdown.Menu>
-
-              </Dropdown>
+            <div className="flex flex-row flex-nowrap relative ">
+              <select className="!text-white !bg-gray-700 ml-1 !text-sm !border-gray-700  !rounded-sm"
+                onClick={(e: any) => {
+                  setEpisode(null)
+                  setIndex(Number(e.target.value));
+                }}
+              >
+                {episodes &&
+                  episodes.map((_item, key) => (
+                    <option key={key} value={_item.id} className="!text-white !min-w-full portrait:!min-h-full !bg-gray-700 " >
+                      {_item.name || _item.id + 1}
+                    </option>
+                  ))}
+              </select>
 
               <button
                 type="button"
