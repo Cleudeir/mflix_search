@@ -20,7 +20,7 @@ export default async function HomeDefault({
       type
     }),
      next: { revalidate: 10 * 60 },
-     cache:"no-cache"
+
   }
   )
 
