@@ -24,8 +24,8 @@ function Header({ type, search }: Props) {
     >
       <Container fluid>        
         <Image src={"/icon.png"} alt={"Mflix"} width={40} height={40} className="mx-2"/>
-        <Nav.Link as={Link} className={type === "movie" ? "px-2 py-1 bg-green-600 text-white rounded-sm" : "p-1"} href="/movie">Filmes</Nav.Link>
-        <Nav.Link as={Link} className={type === "tv" ? "px-2 py-1 bg-green-600 text-white rounded-sm" : "p-1"} href="/tv">Series</Nav.Link>
+        <Nav.Link as={Link} style={{backgroundColor: type === "movie" ? "black": undefined}} className={type === "movie" ? "px-2 py-1 bg-green-300 text-white rounded-sm" : "p-1"} href="/movie">Filmes</Nav.Link>
+        <Nav.Link as={Link} style={{backgroundColor: type === "tv" ? "black": undefined}} className={type === "tv" ? "px-2 py-1 bg-green-300 text-white rounded-sm" : "p-1"} href="/tv">Series</Nav.Link>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"xl"}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${"xl"}`}

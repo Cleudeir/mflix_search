@@ -34,7 +34,7 @@ export default function HomePage({ type, save }: Props): JSX.Element {
                   const remember = localStorage.getItem(String(`${type}_watched`))
                   if (remember) {
                     list = JSON.parse(remember)
-                    const [exists] = list.filter((x: any) => x.id === item.id)
+                    const exists = list.find((x: any) => x.id === item.id)
                     if (!exists) {
                       localStorage.setItem(String(`${type}_watched`), JSON.stringify([item, ...list]))
                     }

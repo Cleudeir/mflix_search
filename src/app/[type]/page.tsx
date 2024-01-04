@@ -10,18 +10,21 @@ export default async function HomeDefault({
 }: Props): Promise<JSX.Element> {
   const type = params.type;
   const resp2 = await fetch(`${process.env.BACK_URL}/tmdb/popular/${type}`,
-    {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        type
-      }),
-      next: { revalidate: 24 * 60 * 60 }
-    }
+  {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      type
+    }),
+     next: { revalidate: 10 * 60 },
+     cache:"no-cache"
+  }
   )
+
   const trending = await resp2.json()
+  console.log('trending: ', trending);
   return (<HomePage save={trending} type={type} />);
 }

@@ -1,5 +1,6 @@
 const genres = {
 movie : [
+  { id: 1, name: "Em Alta" },
   { id: 28, name: "Ação" },
   { id: 12, name: "Aventura" },
   { id: 16, name: "Animação" },
@@ -21,6 +22,7 @@ movie : [
   { id: 37, name: "Faroeste" },
 ],
 tv : [
+  { id: 1, name: "Em Alta" },
   { id: 10759, name: "Ação e Aventura" },
   { id: 16, name: "Animação" },
   { id: 35, name: "Comédia" },

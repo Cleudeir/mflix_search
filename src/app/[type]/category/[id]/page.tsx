@@ -22,7 +22,8 @@ export default async function HomeCategory({
         type,
         genreId
       }),
-      next: { revalidate: 24 * 60 * 60 }
+      next: { revalidate: 24 * 60 * 60 },
+      cache:"no-cache"
     }
   )
   const trending = await resp2.json()

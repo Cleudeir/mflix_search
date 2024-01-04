@@ -14,7 +14,9 @@ export interface Props {
   params: any;
 }
 
-export default function Video({ params }: Props): JSX.Element | null | undefined {
+export default function Video({
+  params,
+}: Props): JSX.Element | null | undefined {
   const { episode, setEpisode, episodes, item, type, setIndex, index } =
     usePageVideo(params);
   if (!episodes) {
@@ -22,12 +24,14 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
       <div className="bg-slate-700 w-screen h-screen">
         <Loading />
       </div>
-    )
+    );
   }
-  const styleButton = "cursor-pointer h-[34px] w-[52px] ml-1 bg-gray-700 text-white font-bold rounded-sm"
+  const styleButton =
+    "cursor-pointer h-[34px] w-[52px] ml-1 bg-gray-700 text-white font-bold rounded-sm";
 
   return (
-    episodes && item && (
+    episodes &&
+    item && (
       <div
         className={`
         group flex bg-slate-700  flex-col portrait:rotate-90 items-center justify-center w-screen h-screen font-bold text-xs 
@@ -45,27 +49,29 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
           rounded-sm p-2 text-white 
           `}
         >
-          <Link href={localStorage.getItem('page') || `${type}`}>
-            <button
-              type="button"
-              className={styleButton}
-            >
+          <Link href={localStorage.getItem("page") || `${type}`}>
+            <button type="button" className={styleButton}>
               Home
             </button>
           </Link>
 
           {type === "tv" ? (
             <div className="flex flex-row flex-nowrap relative ">
-              <select className="!text-white !bg-gray-700 ml-1 !text-sm !border-gray-700  !rounded-sm"
+              <select
+                className="!text-white !bg-gray-700 ml-1 !text-sm !border-gray-700  !rounded-sm"
                 value={index}
                 onChange={(e: any) => {
-                  setEpisode(null)
+                  setEpisode(null);
                   setIndex(Number(e.target.value));
                 }}
               >
                 {episodes &&
                   episodes.map((_item, key) => (
-                    <option key={key} value={_item.id} className="!text-white !min-w-full portrait:!min-h-full !bg-gray-700 " >
+                    <option
+                      key={key}
+                      value={_item.id}
+                      className="!text-white !min-w-full portrait:!min-h-full !bg-gray-700 "
+                    >
                       {_item.name || _item.id + 1}
                     </option>
                   ))}
@@ -76,7 +82,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
                 className={styleButton}
                 onClick={() => {
                   if (index > 0) {
-                    setEpisode(null)
+                    setEpisode(null);
                     setIndex(index - 1);
                   }
                 }}
@@ -88,7 +94,7 @@ export default function Video({ params }: Props): JSX.Element | null | undefined
                 className={styleButton}
                 onClick={() => {
                   if (episodes && index < episodes.length - 1) {
-                    setEpisode(null)
+                    setEpisode(null);
                     setIndex(index + 1);
                   }
                 }}
