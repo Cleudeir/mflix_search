@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  mflix-search:
+    build: .
+    restart: always
+    environment:
+      - BACK_URL=${BACK_URL}
+    ports:
+      - "3337:3337"
+    env_file:
+      - .env
+
+volumes:
+  mflix-data:
