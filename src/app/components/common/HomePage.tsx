@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 interface Props {
   type: "movie" | "tv";
   save: any[];
+  all: any[]
 }
 
 export default function HomePage({ type, save , all}: Props): JSX.Element {
