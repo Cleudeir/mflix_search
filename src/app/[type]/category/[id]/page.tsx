@@ -11,6 +11,16 @@ export default async function HomeCategory({
   const type = params.type;
   const genreId = params.id;
 
+
+  const resp = await fetch(`${process.env.BACK_URL}/all/${type}`,
+  {
+    method: "GET",   
+     next: { revalidate: 10 * 60 },
+
+  }
+  )
+  const all = await resp.json()
+
   const resp2 = await fetch(`${process.env.BACK_URL}/tmdb/popular/${type}`,
     {
       method: "POST",
@@ -28,5 +38,5 @@ export default async function HomeCategory({
   )
   const trending = await resp2.json()
   
-  return (<HomePage save={trending} type={type} />);
+  return (<HomePage save={trending} all={all} type={type} />);
 }
