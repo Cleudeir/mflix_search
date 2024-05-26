@@ -10,7 +10,7 @@ export default async function HomeCategory({
 }: Props): Promise<JSX.Element> {
   const type = params.type;
   const genreId = params.id;
-  console.log('params: ', params);
+
   const resp2 = await fetch(`${process.env.BACK_URL}/tmdb/popular/${type}`,
     {
       method: "POST",
@@ -27,6 +27,6 @@ export default async function HomeCategory({
     }
   )
   const trending = await resp2.json()
-  console.log('trending: ', trending);
+  
   return (<HomePage save={trending} type={type} />);
 }

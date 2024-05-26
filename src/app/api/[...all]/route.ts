@@ -9,11 +9,11 @@ const parserUrl = (url: string) => {
     .join("/")
     .replace("https/", "https://")
     .replace("http:/", "http://");
-  console.log('url: ', _url);
+ 
   if (!_url.includes("http")) {
     _url = process.env.BACK_URL + '/' + _url
   }
-  console.log('url: ', _url);
+
   return _url
 };
 

@@ -1,5 +1,0 @@
-##
-POST http://192.168.1.245:3335/api/infoMovie
-content-type: application/json
-
-{"item":{"id":838480,"title":"comvoce volume 1","dub":true,"year":"2022","quality":"1080p","url":"comvoce-volume-1-dublado-2022-1080p_8042e6c01"}}

@@ -16,12 +16,12 @@ export default function HomeWatched({
   const [isSave, setSave] = useState(null)
   const type = params.type;
   useEffect(() => {   
-    console.log('params: ', params);
+    
     const remember = localStorage.getItem(`${type}_watched`)
-    console.log(`${type}_watched`, remember);
+   
     if (remember) {
       const save = JSON.parse(remember).slice(-10)
-      console.log('trending: ', save);
+      
       setSave(save)
     }else{
       router.push(`/${type}`)

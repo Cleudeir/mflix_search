@@ -8,6 +8,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import genres from "../../utils/genres";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import Loading from "./loading";
 
 
 interface Props {
@@ -15,6 +17,8 @@ interface Props {
   search: (e: any) => void;
 }
 function Header({ type, search }: Props) {
+  const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(false)
   return (
     <Navbar
       collapseOnSelect
@@ -22,10 +26,10 @@ function Header({ type, search }: Props) {
       expand={"sm"}
       className="h-[50px] bg-white text-xl text-black "
     >
-      <Container fluid>        
-        <Image src={"/icon.png"} alt={"Mflix"} width={40} height={40} className="mx-2"/>
-        <Nav.Link as={Link} style={{backgroundColor: type === "movie" ? "black": undefined}} className={type === "movie" ? "px-2 py-1 bg-green-300 text-white rounded-sm" : "p-1"} href="/movie">Filmes</Nav.Link>
-        <Nav.Link as={Link} style={{backgroundColor: type === "tv" ? "black": undefined}} className={type === "tv" ? "px-2 py-1 bg-green-300 text-white rounded-sm" : "p-1"} href="/tv">Series</Nav.Link>
+      <Container fluid>
+        <Image src={"/icon.png"} alt={"Mflix"} width={40} height={40} className="mx-2" />
+        <Nav.Link as={Link} style={{ backgroundColor: type === "movie" ? "black" : undefined }} className={type === "movie" ? "px-2 py-1 bg-green-300 text-white rounded-sm" : "p-1"} href="/movie">Filmes</Nav.Link>
+        <Nav.Link as={Link} style={{ backgroundColor: type === "tv" ? "black" : undefined }} className={type === "tv" ? "px-2 py-1 bg-green-300 text-white rounded-sm" : "p-1"} href="/tv">Series</Nav.Link>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"xl"}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${"xl"}`}
@@ -47,14 +51,10 @@ function Header({ type, search }: Props) {
               >
                 {genres[type].map(
                   ({ id, name }: { id: number; name: string }) => (
-                    <NavDropdown.Item                      
+                    <NavDropdown.Item
                       href={`/${type}/category/${id}`}
                       key={id}
                       onClick={() => {
-                        const element: HTMLElement | null = document?.querySelector(".btn-close")
-                        if (element) {
-                          element.click()
-                        }
                       }
                       }
                     >
@@ -71,20 +71,34 @@ function Header({ type, search }: Props) {
                 placeholder="Buscar"
                 className="me-2"
                 aria-label="Search"
-                onChange={(e) => { search(e) }}
-              />
-              <button
-                type='button'
-                className="sm:hidden border-2 rounded-lg px-2 hover:bg-lime-600 hover:text-white"
-                onClick={() => {
-                  const element: HTMLElement | null = document?.querySelector(".btn-close")
-                  if (element) {
-                    element.click()
+                value={searchValue}
+                onChange={(e) => {
+                  setSearchValue(e.target.value)
+                  if (e.target.value === '') {
+                    search('')
                   }
+                }}
+              />
+             {!loading ? <button
+                type='button'
+                className="border-2 rounded-lg px-2 hover:bg-lime-600 hover:text-white"
+                onClick={async () => {
+                  setLoading(true)
+                  await search(searchValue)
+                  try {
+                    const element: HTMLElement | null = document?.querySelector(".btn-close")
+                    if (element) {
+                      element.click()
+                    }
+                  } catch (error) {
+                    console.error(error)
+                  }
+                  setLoading(false)
                 }}
               >
                 Search
               </button>
+                : <Loading />}
             </Form>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
