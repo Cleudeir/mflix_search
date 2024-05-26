@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useEffect, useState } from "react";
-import { Loading } from '@/app/components/common/loading';
 
 export interface categoryProps {
   genreId: number;
