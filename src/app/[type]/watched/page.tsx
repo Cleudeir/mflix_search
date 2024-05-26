@@ -14,20 +14,30 @@ export default function HomeWatched({
 }: Props): JSX.Element | null {
   const router = useRouter()
   const [isSave, setSave] = useState(null)
+  const [all, setAll] = useState(null)
   const type = params.type;
-  useEffect(() => {   
-    
+
+  const start = async () => {
     const remember = localStorage.getItem(`${type}_watched`)
-   
     if (remember) {
-      const save = JSON.parse(remember).slice(-10)
-      
+      const save = await JSON.parse(remember).slice(-10)
       setSave(save)
+    } else {
+      router.push(`/${type}`)
+    }
+
+    const rememberAll = localStorage.getItem(`${type}_all`)
+    if (rememberAll) {
+      const _all = await JSON.parse(rememberAll)
+      setAll(_all)
     }else{
       router.push(`/${type}`)
     }
+  }
+  useEffect(() => {
+    start()
   }, [params, router, type])
 
-  return (isSave && <HomePage save={isSave} type={type} />) 
+  return (isSave && all && <HomePage save={isSave} all={all} type={type} />)
 
 }

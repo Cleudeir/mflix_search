@@ -27,9 +27,10 @@ export default function HomePage({ type, save , all}: Props): JSX.Element {
     if (remember) {
       list = JSON.parse(remember)
       const exists = list.find((x: any) => x.id === item.id)
+      localStorage.setItem(String(`${type}_all`), JSON.stringify(all))
       if (!exists) {
-        localStorage.setItem(String(`${type}_watched`), JSON.stringify([item, ...list]))
-      }remember
+        localStorage.setItem(String(`${type}_watched`), JSON.stringify([item, ...list]))        
+      }
     } else {
       localStorage.setItem(String(`${type}_watched`), JSON.stringify([item]))
     }
