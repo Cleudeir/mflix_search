@@ -8,17 +8,30 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import genres from "../../utils/genres";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "./loading";
 
 
 interface Props {
   type: "movie" | "tv";
-  search: (e: any) => void;
+  search: (e: any) => Promise<void>;
 }
 function Header({ type, search }: Props) {
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(false)
+  const submit = async () => {
+    setLoading(true)
+    await search(searchValue)
+    try {
+      const element: HTMLElement | null = document?.querySelector(".btn-close")
+      if (element) {
+        element.click()
+      }
+    } catch (error) {
+      console.error(error)
+    }
+    setLoading(false)
+  }
   return (
     <Navbar
       collapseOnSelect
@@ -64,13 +77,14 @@ function Header({ type, search }: Props) {
                 )}
               </NavDropdown>
             </Nav>
-            <Form className="d-flex py-2">
+            <Form className="d-flex py-2" onSubmit={e => { e.preventDefault(); submit() }}>
               <Form.Control
                 type="search"
                 id='input'
                 placeholder="Buscar"
                 className="me-2"
                 aria-label="Search"
+                onSubmit={() => { }}
                 value={searchValue}
                 onChange={(e) => {
                   setSearchValue(e.target.value)
@@ -79,22 +93,10 @@ function Header({ type, search }: Props) {
                   }
                 }}
               />
-             {!loading ? <button
+              {!loading ? <button
                 type='button'
                 className="border-2 rounded-lg px-2 hover:bg-lime-600 hover:text-white"
-                onClick={async () => {
-                  setLoading(true)
-                  await search(searchValue)
-                  try {
-                    const element: HTMLElement | null = document?.querySelector(".btn-close")
-                    if (element) {
-                      element.click()
-                    }
-                  } catch (error) {
-                    console.error(error)
-                  }
-                  setLoading(false)
-                }}
+                onClick={submit}
               >
                 Search
               </button>
