@@ -16,7 +16,7 @@ interface Props {
 
 export default function HomePage({ type, save , all}: Props): JSX.Element {
   const pathname = usePathname()
-  const { error, data, setData, search } = usePageHome(
+  const { error, data, setData } = usePageHome(
     type,
     save,
     all
@@ -42,8 +42,7 @@ export default function HomePage({ type, save , all}: Props): JSX.Element {
   return (
     <div className="min-h-screen bg-slate-700">
       <Header
-        type={type}
-        search={search}
+        type={type}    
       />
       <div className="flex flex-row flex-wrap justify-center items-center  w-full p-1 min-h-[calc(100vh-54px)]">
                <Suspense fallback={<Loading />}>

@@ -10,21 +10,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
+import { useRouter } from 'next/navigation'
 
 
 interface Props {
   type: "movie" | "tv";
-  search: (e: any) => Promise<void>;
 }
-function Header({ type, search }: Props) {
+function Header({ type }: Props) {
+  const router = useRouter()
   const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(false)
+
   const submit = async () => {
-    await search(searchValue)
     try {
-      const element: HTMLElement | null = document?.querySelector(".btn-close")
-      if (element) {
-        element.click()
-      }
+      setLoading(true)
+      const url = `/${type}/busca/${searchValue.toLowerCase().replace(/ /g, "-")}`
+      router.push(url)
     } catch (error) {
       console.error(error)
     }
@@ -60,7 +61,7 @@ function Header({ type, search }: Props) {
                 id={`offcanvasNavbarDropdown-expand-${"xl"}`}
               >
                 {genres[type].map(
-                  ({ id, name, nameWithoutAccents}: { id: number; name: string,nameWithoutAccents: string}) => (
+                  ({ id, name, nameWithoutAccents }: { id: number; name: string, nameWithoutAccents: string }) => (
                     <NavDropdown.Item
                       href={`/${type}/category/${nameWithoutAccents}`}
                       key={id}
@@ -84,22 +85,20 @@ function Header({ type, search }: Props) {
                 onSubmit={() => { }}
                 value={searchValue}
                 onChange={(e) => {
-                  setSearchValue(e.target.value)
-                  if (e.target.value === '') {
-                    search('')
-                  }
+                  setSearchValue(e.target.value)                
                 }}
               />
-              <div style={{ width: '80px' }}> 
-              <button
-                type='button'
-                className="rounded-lg px-2 py-1 text-white hover:bg-lime-600 hover:text-white bg-green-400"
-                onClick={submit}
-              >
-                Buscar
-              </button>
-              </div>
-               
+              {!loading ? <div style={{ width: '80px' }}>
+                <button
+                  type='button'
+                  className="rounded-lg px-2 py-1 text-white hover:bg-lime-600 hover:text-white bg-green-400"
+                  onClick={submit}
+                >
+                  Buscar
+                </button>
+              </div> : <div style={{ width: '80px' }}>
+                <Loading color={'green'} />
+              </div>}
             </Form>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

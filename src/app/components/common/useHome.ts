@@ -17,58 +17,8 @@ function usePageHome(type: "movie" | "tv", save: any[], all: any[]) {
     setData(save)
   }, [])
 
-  const request = async (item: string) => {
-    try {
-      const url = `/api/tmdb/${type}`  
-      const resp2 = await fetch(url,
-      {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          item
-        }),
-        next: { revalidate: 24 * 1 * 60 },
-      }
-    )
-    const data = await resp2.json()
-    return data
-    } catch (error) {
-      console.error(error)
-    }
-   
-  };
 
- async function search(input: any) {
-    if(Loading) return  
-    setData(null)
-    if (input !== '') {
-      if (all) {
-        const filter = all.filter((x: any) =>
-          x.title.toLowerCase().includes(input.toLowerCase())
-        );
-        const slice = filter.slice(0, 10)
-        const requests = slice.map((x: any) => request(x))
-        setLoading(true)
-        const promises = await Promise.all(requests) 
-       
-        if (slice.length > 0) {
-          setError(null)                 
-          setData(promises);
-          
-        } else {
-          setError("Nada Encontrado!")
-        }
-        setLoading(false)
-      }
-    }else{
-      setData(save)
-    }
-  }
-
-  return { error, data, setData, search };
+  return { error, data, setData };
 }
 
 export default usePageHome;
