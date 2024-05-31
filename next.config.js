@@ -8,7 +8,7 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "/movie",
+        destination: "/movie/category/em-alta",
         permanent: true,
       },
     ];
