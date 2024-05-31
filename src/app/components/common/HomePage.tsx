@@ -16,9 +16,6 @@ interface Props {
 
 export default function HomePage({ type, save , all}: Props): JSX.Element {
   const pathname = usePathname()
-  const genderId = pathname.split('category/')[1]
-  const genderFilter = genres[type].find(item => item.id == genderId)
-  console.log(genderFilter)
   const { error, data, setData, search } = usePageHome(
     type,
     save,
