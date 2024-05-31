@@ -41,9 +41,9 @@ function usePageHome(type: "movie" | "tv", save: any[], all: any[]) {
    
   };
 
- async function search(input: any) {    
-
+ async function search(input: any) {
     if(Loading) return  
+    setData(null)
     if (input !== '') {
       if (all) {
         const filter = all.filter((x: any) =>

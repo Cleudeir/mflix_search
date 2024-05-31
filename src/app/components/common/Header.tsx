@@ -18,9 +18,7 @@ interface Props {
 }
 function Header({ type, search }: Props) {
   const [searchValue, setSearchValue] = useState("");
-  const [loading, setLoading] = useState(false)
   const submit = async () => {
-    setLoading(true)
     await search(searchValue)
     try {
       const element: HTMLElement | null = document?.querySelector(".btn-close")
@@ -30,7 +28,6 @@ function Header({ type, search }: Props) {
     } catch (error) {
       console.error(error)
     }
-    setLoading(false)
   }
   return (
     <Navbar
@@ -93,14 +90,16 @@ function Header({ type, search }: Props) {
                   }
                 }}
               />
-              {!loading ? <button
+              <div style={{ width: '80px' }}> 
+              <button
                 type='button'
-                className="border-2 rounded-lg px-2 hover:bg-lime-600 hover:text-white"
+                className="rounded-lg px-2 py-1 text-white hover:bg-lime-600 hover:text-white bg-green-400"
                 onClick={submit}
               >
-                Search
+                Buscar
               </button>
-                : <Loading />}
+              </div>
+               
             </Form>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
