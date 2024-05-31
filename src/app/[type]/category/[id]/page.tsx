@@ -1,3 +1,4 @@
+import genres from '@/app/utils/genres';
 import HomePage from '../../../components/common/HomePage'
 interface Props {
   params: {
@@ -9,8 +10,10 @@ export default async function HomeCategory({
   params,
 }: Props): Promise<JSX.Element> {
   const type = params.type;
-  const genreId = params.id;
-
+  const nameWithoutAccents = params.id;
+  const genreId = genres[type].find(item => item.nameWithoutAccents == nameWithoutAccents)?.id
+  
+  console.log('-----',genreId)
 
   const resp = await fetch(`${process.env.BACK_URL}/all/${type}`,
   {

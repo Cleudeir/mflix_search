@@ -60,9 +60,9 @@ function Header({ type, search }: Props) {
                 id={`offcanvasNavbarDropdown-expand-${"xl"}`}
               >
                 {genres[type].map(
-                  ({ id, name }: { id: number; name: string }) => (
+                  ({ id, name, nameWithoutAccents}: { id: number; name: string }) => (
                     <NavDropdown.Item
-                      href={`/${type}/category/${id}`}
+                      href={`/${type}/category/${nameWithoutAccents}`}
                       key={id}
                       onClick={() => {
                       }

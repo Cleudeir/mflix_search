@@ -5,6 +5,8 @@ import usePageHome from "./useHome";
 import Header from "./Header";
 import Loading from "./loading";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
+import genres from "@/app/utils/genres";
 
 interface Props {
   type: "movie" | "tv";
@@ -13,8 +15,10 @@ interface Props {
 }
 
 export default function HomePage({ type, save , all}: Props): JSX.Element {
-  
   const pathname = usePathname()
+  const genderId = pathname.split('category/')[1]
+  const genderFilter = genres[type].find(item => item.id == genderId)
+  console.log(genderFilter)
   const { error, data, setData, search } = usePageHome(
     type,
     save,
@@ -45,7 +49,7 @@ export default function HomePage({ type, save , all}: Props): JSX.Element {
         search={search}
       />
       <div className="flex flex-row flex-wrap justify-center items-center  w-full p-1 min-h-[calc(100vh-54px)]">
-        <Suspense fallback={<Loading />}>
+               <Suspense fallback={<Loading />}>
           {!error && data &&
             data.map((item: any, index: number) =>(
             <div key={item.id + index + item.url} onClick={() => onClick(item)}>
