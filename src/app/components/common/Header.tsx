@@ -22,12 +22,14 @@ function Header({ type }: Props) {
   const [loading, setLoading] = useState(false)
 
   const submit = async () => {
-    try {
-      setLoading(true)
-      const url = `/${type}/busca/${searchValue.toLowerCase().replace(/ /g, "-")}`
-      router.push(url)
-    } catch (error) {
-      console.error(error)
+    if(searchValue.length > 0){
+      try {
+        setLoading(true)
+        const url = `/${type}/busca/${searchValue.toLowerCase().replace(/ /g, "-")}`
+        router.push(url)
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
   return (
