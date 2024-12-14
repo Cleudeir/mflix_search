@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+                # page.tsx                
+                ## project structure
+                ```                    
+                mflix_search/
+    package-lock.json
+    README.md
+    tailwind.config.js
+    Dockerfile
+    tsconfig.json
+    postcss.config.js
+    package.json
+    yarn.lock
+    env.local.exemple
+    docker-compose.yml
+    next.config.js
+    src/
+        app/
+            head.tsx
+            globals.css
+            layout.tsx
+            api/
+                [...all]/
+                    route.ts
+                tmdb/
+                    [...type]/
+                        route.ts
+            interfaces/
+                Movie.ts
+                Tv.ts
+                tmdb.ts
+            utils/
+                genres.ts
+                noCors.ts
+            components/
+                common/
+                    useHome.ts
+                    Card.tsx
+                    HomePage.tsx
+                    Header.tsx
+                    loading.tsx
+            [type]/
+                view/
+                    [[...video]]/
+                        usePage.ts
+                        page.tsx
+                busca/
+                    [id]/
+                        page.tsx
+                category/
+                    [id]/
+                        page.tsx
+                watched/
+                    page.tsx
+    public/
+        icon.png                
+                ```
+                ## Sumário do Projeto mflix_search
 
-First, run the development server:
+**Objetivo:** Criar uma aplicação web para pesquisar filmes e séries no banco de dados Mflix.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+**Dependências:** Node.js, Next.js, React, Bootstrap, React-Bootstrap, React-Icons, Tailwind CSS, TypeScript.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Instalação:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clonar o repositório.
+2. Instalar dependências: `npm install`
+3. Criar arquivo `.env` (com variáveis de ambiente necessárias, como `BACK_URL`).
+4. Executar a aplicação: `npm run dev` (desenvolvimento) ou `npm run start` (produção).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+**Uso:** A aplicação permite pesquisar filmes e séries, filtrar por gênero e exibir detalhes de cada item.  A navegação entre filmes e séries, e a persistência de dados (como itens assistidos) é feita via localStorage e roteamento client-side do Next.js. Há mecanismos de tratamento de erros e indicação de carregamento.
 
-To learn more about Next.js, take a look at the following resources:
+**Arquitetura:** A aplicação utiliza a arquitetura de componentes do React, com Next.js para roteamento e renderização do lado do servidor.  Utiliza-se hooks customizados para gerenciamento de estado e busca de dados.  O design é baseado em Bootstrap e Tailwind CSS.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Pipeline:** (A descrição completa requer mais informações sobre o processo de CI/CD do projeto).  Provavelmente envolve a construção da aplicação com `npm run build`, testes (detalhes não fornecidos) e deployment (detalhes não fornecidos).
+                
+                
