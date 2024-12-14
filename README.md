@@ -1,8 +1,7 @@
-
-                # page.tsx                
-                ## project structure
-                ```                    
-                mflix_search/
+# mflix_search              
+## project structure
+```                    
+mflix_search/
     package-lock.json
     README.md
     tailwind.config.js
@@ -54,8 +53,8 @@
                     page.tsx
     public/
         icon.png                
-                ```
-                ## Sumário do Projeto mflix_search
+```
+## Sumário do Projeto mflix_search
 
 **Objetivo:** Criar uma aplicação web para pesquisar filmes e séries no banco de dados Mflix.
 
